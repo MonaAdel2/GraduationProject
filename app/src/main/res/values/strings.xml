@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">GraduationProject</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="login_frg_welcome_message">Welcome to app_name</string>
+    <string name="login_frg_hello_again">Hello again</string>
+    <string name="login_frg_forget_password">Forget Password?</string>
+    <string name="login_frg_hint_phone">Enter your phone number</string>
+    <string name="login_frg_hint_password">Password</string>
+    <string name="login_frg_login_button">Login</string>
 </resources>

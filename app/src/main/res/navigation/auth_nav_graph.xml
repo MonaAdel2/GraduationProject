@@ -3,24 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/auth_nav_graph"
-    app:startDestination="@id/loginFragment">
-
+    app:startDestination="@id/sendOTPCodeFragment">
+    <fragment
+        android:id="@+id/sendOTPCodeFragment"
+        android:name="com.example.graduationproject.authentication.view.SendOTPCodeFragment"
+        android:label="fragment_send_otp_code"
+        tools:layout="@layout/fragment_send_otp_code" >
+        <action
+            android:id="@+id/action_sendOTPCodeFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.graduationproject.authentication.view.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
-        <action
-            android:id="@+id/action_loginFragment_to_registerFragment"
-            app:destination="@id/registerFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/registerFragment"
-        android:name="com.example.graduationproject.authentication.view.RegisterFragment"
-        android:label="fragment_register"
-        tools:layout="@layout/fragment_register" >
-        <action
-            android:id="@+id/action_registerFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
+        <argument
+            android:name="VerificationCode"
+            app:argType="string"
+            app:nullable="true" />
     </fragment>
 </navigation>

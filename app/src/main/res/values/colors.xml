@@ -2,4 +2,20 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="background">#292F3F</color>
+
+    <color name="sender_msg">#272A35</color>
+    <color name="receiver_msg">#373E4E</color>
+
+    <color name="transparent_white">#99FFFFFF</color>
+
+    <color name="green_icon_bg">#00AC83</color>
+    <color name="gray_icon_bg">#373E4E</color>
+    <color name="purple_icon_bg">#837DFF</color>
+    <color name="blue_icon_bg">#03A9F1</color>
+
+    <color name="search_bg">#00000040</color>
+
+
 </resources>

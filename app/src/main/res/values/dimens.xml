@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+<!--    Font Sizes     -->
+    <dimen name="headline1">27sp</dimen>
+    <dimen name="headline2">20sp</dimen>
+
+<!--    for recent chats   -->
+    <dimen name="name_time_title">15sp</dimen>
+    <dimen name="message">13sp</dimen>
+    <dimen name="time">12sp</dimen>
+
+
+<!--    favorits-->
+    <dimen name="fav_name">12sp</dimen>
+
+<!--    edit text hint-->
+    <dimen name="average_font_size">14sp</dimen>
+
+
+<!--    Margins and Padding-->
+
+<!--    Margin-->
+    <dimen name="main_margin_horizontal">25dp</dimen>
+    <dimen name="main_margin_vertical">15dp</dimen>
+
+    <dimen name="msg_margin_top">10dp</dimen>
+    <dimen name="msg_margin_bottom">0dp</dimen>
+    <dimen name="msg_margin_start">25dp</dimen>
+    <dimen name="msg_margin_end">25dp</dimen>
+
+<!--    Padding-->
+    <dimen name="msg_padding_top">3dp</dimen>
+    <dimen name="msg_padding_bottom">3dp</dimen>
+    <dimen name="msg_padding_start">5dp</dimen>
+    <dimen name="msg_padding_end">5dp</dimen>
+
+<!--    Radius-->
+    <dimen name="editText_corner_radius">10dp</dimen>
+    <dimen name="icons_bg_corner_radius">10dp</dimen>
+
+    <dimen name="fav_card_corner_radius">30dp</dimen>
+    <dimen name="message_corner_radius">20dp</dimen>
+
+    <dimen name="button_corner_radius">20dp</dimen>
+
+
+</resources>

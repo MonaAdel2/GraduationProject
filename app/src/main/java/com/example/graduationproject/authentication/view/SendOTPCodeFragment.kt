@@ -46,7 +46,9 @@ class SendOTPCodeFragment : Fragment() {
             val intent = Intent(requireContext(), MainActivity::class.java)
 
             requireActivity().startActivity(intent)
+
             requireActivity().finish()
+
         }
         ccp = binding.countryCode
         ccp.registerCarrierNumberEditText(binding.phoneNumberEditText)

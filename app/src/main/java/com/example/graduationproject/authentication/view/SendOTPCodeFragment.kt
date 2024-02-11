@@ -44,6 +44,7 @@ class SendOTPCodeFragment : Fragment() {
 
         if (auth.currentUser != null) {
             val intent = Intent(requireContext(), MainActivity::class.java)
+
             requireActivity().startActivity(intent)
             requireActivity().finish()
         }

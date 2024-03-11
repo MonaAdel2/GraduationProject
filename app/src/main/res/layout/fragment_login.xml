@@ -47,30 +47,64 @@
         app:layout_constraintStart_toStartOf="@+id/et_otp_code"
         app:layout_constraintTop_toBottomOf="@+id/et_otp_code" />
 
-
-    <com.chaos.view.PinView
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/et_otp_code"
-        style="@style/PinWidget.PinView"
-        android:layout_width="wrap_content"
+        style="@style/ThemeOverlay.Material3.TextInputEditText.FilledBox"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
-        android:cursorVisible="true"
-        app:cursorColor="@color/white"
-        android:inputType="number"
-        android:itemBackground="@color/transparent_black"
-        app:hideLineWhenFilled="true"
-        app:itemCount="6"
-        app:itemHeight="50dp"
-        app:itemRadius="15dp"
-        app:itemWidth="50dp"
-        app:itemSpacing="10dp"
-        app:lineWidth="0dp"
-        android:textColor="@color/white"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        app:lineColor="@color/transparent_black"
+        android:layout_marginEnd="32dp"
+        android:textColorHint="@color/transparent_white"
+        android:theme="@style/EditTextThemeOverlay"
+        app:boxBackgroundColor="@color/transparent_black"
+        app:boxCornerRadiusBottomEnd="@dimen/editText_corner_radius"
+        app:boxCornerRadiusBottomStart="@dimen/editText_corner_radius"
+        app:boxCornerRadiusTopEnd="@dimen/editText_corner_radius"
+        app:boxCornerRadiusTopStart="@dimen/editText_corner_radius"
+        app:boxStrokeColor="@color/black"
+        app:boxStrokeWidth="0dp"
+        app:endIconMode="clear_text"
+        app:helperTextTextAppearance="@color/white"
+        app:hintTextAppearance="@color/white"
+        app:hintTextColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_verification_welcome_msg" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_verification_welcome_msg">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textColorHint="@color/transparent_white"
+            app:hintTextAppearance="@color/white"
+            app:hintTextColor="@color/white" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+<!--    <com.chaos.view.PinView-->
+<!--        android:id="@+id/et_otp_code"-->
+<!--        style="@style/PinWidget.PinView"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="32dp"-->
+<!--        android:cursorVisible="true"-->
+<!--        app:cursorColor="@color/white"-->
+<!--        android:inputType="number"-->
+<!--        android:itemBackground="@color/transparent_black"-->
+<!--        app:hideLineWhenFilled="true"-->
+<!--        app:itemCount="6"-->
+<!--        app:itemHeight="50dp"-->
+<!--        app:itemRadius="15dp"-->
+<!--        app:itemWidth="50dp"-->
+<!--        app:itemSpacing="10dp"-->
+<!--        app:lineWidth="0dp"-->
+<!--        android:textColor="@color/white"-->
+<!--        android:textSize="20dp"-->
+<!--        android:textStyle="bold"-->
+<!--        app:lineColor="@color/transparent_black"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/tv_verification_welcome_msg" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

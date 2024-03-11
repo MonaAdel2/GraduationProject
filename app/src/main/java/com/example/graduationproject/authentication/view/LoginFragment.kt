@@ -38,7 +38,8 @@ class LoginFragment : Fragment() {
         authViewModel = ViewModelProvider(this)[AuthViewModel::class.java]
 
         binding.btnVerifyOtp.setOnClickListener {
-            val otp = binding.etOtpCode.text.toString()
+//            val otp = binding.etOtpCode.text.toString()
+            val otp = binding.etOtpCode.editText?.text.toString()
             if (otp.isEmpty()) {
                 Toast.makeText(requireContext(), "Please enter OTP", Toast.LENGTH_SHORT).show()
                 Log.d(TAG, "onViewCreated: enter valid otp")

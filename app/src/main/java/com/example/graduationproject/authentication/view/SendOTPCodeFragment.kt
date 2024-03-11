@@ -1,6 +1,7 @@
 package com.example.graduationproject.authentication.view
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -42,19 +43,16 @@ class SendOTPCodeFragment : Fragment() {
         auth = FirebaseAuth.getInstance()
         authViewModel = ViewModelProvider(this)[AuthViewModel::class.java]
 
-        if (auth.currentUser != null) {
-            val intent = Intent(requireContext(), MainActivity::class.java)
-
-            requireActivity().startActivity(intent)
-
-            requireActivity().finish()
-
-        }
+//        if (auth.currentUser != null) {
+//            val intent = Intent(requireContext(), MainActivity::class.java)
+//            requireActivity().startActivity(intent)
+//            requireActivity().finish()
+//        }
         ccp = binding.countryCode
-        ccp.registerCarrierNumberEditText(binding.phoneNumberEditText)
+        ccp.registerCarrierNumberEditText(binding.phoneNumberEditText.editText)
 
         binding.sendOtpButton.setOnClickListener {
-            val phoneNumber = binding.phoneNumberEditText.text.toString()
+            val phoneNumber = binding.phoneNumberEditText.editText?.text.toString()
             if (phoneNumber.isEmpty()) {
                 Toast.makeText(
                     requireContext(),

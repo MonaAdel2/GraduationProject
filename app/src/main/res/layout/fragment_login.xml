@@ -4,28 +4,73 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".authentication.view.LoginFragment">
+    tools:context=".authentication.view.LoginFragment"
+    android:background="@color/background">
 
-    <EditText
-        android:id="@+id/otpEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:hint="@string/login_frg_hint_code"
-        android:inputType="number"
+
+    <ImageView
+        android:id="@+id/img_verification_icon"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="80dp"
+        android:src="@drawable/verification_code_icon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/verifyOtpButton"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/tv_verification_welcome_msg"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/otpEditText"
         android:layout_marginTop="32dp"
+        android:layout_marginHorizontal="@dimen/main_margin_horizontal"
+        android:gravity="center"
+        android:maxLines="2"
+        android:text="Enter the verification code sent to your phone number"
+        android:textColor="@color/white"
+        android:textSize="@dimen/headline2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_verification_icon" />
+
+
+    <Button
+        android:id="@+id/btn_verify_otp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/et_otp_code"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="@color/blue_icon_bg"
         android:text="@string/login_frg_verify_code_button"
-        app:layout_constraintEnd_toEndOf="@+id/otpEditText"
-        app:layout_constraintStart_toStartOf="@+id/otpEditText"
-        app:layout_constraintTop_toBottomOf="@+id/otpEditText" />
+        app:layout_constraintEnd_toEndOf="@+id/et_otp_code"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/et_otp_code"
+        app:layout_constraintTop_toBottomOf="@+id/et_otp_code" />
+
+
+    <com.chaos.view.PinView
+        android:id="@+id/et_otp_code"
+        style="@style/PinWidget.PinView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:cursorVisible="true"
+        app:cursorColor="@color/white"
+        android:inputType="number"
+        android:itemBackground="@color/transparent_black"
+        app:hideLineWhenFilled="true"
+        app:itemCount="6"
+        app:itemHeight="50dp"
+        app:itemRadius="15dp"
+        app:itemWidth="50dp"
+        app:itemSpacing="10dp"
+        app:lineWidth="0dp"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:lineColor="@color/transparent_black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_verification_welcome_msg" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

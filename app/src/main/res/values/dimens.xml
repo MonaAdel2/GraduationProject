@@ -11,7 +11,7 @@
     <dimen name="time">12sp</dimen>
 
 
-<!--    favorits-->
+<!--    favorites-->
     <dimen name="fav_name">12sp</dimen>
 
 <!--    edit text hint-->
@@ -36,8 +36,8 @@
     <dimen name="msg_padding_end">5dp</dimen>
 
 <!--    Radius-->
-    <dimen name="editText_corner_radius">10dp</dimen>
-    <dimen name="icons_bg_corner_radius">10dp</dimen>
+    <dimen name="editText_corner_radius">15dp</dimen>
+    <dimen name="icons_bg_corner_radius">15dp</dimen>
 
     <dimen name="fav_card_corner_radius">30dp</dimen>
     <dimen name="message_corner_radius">20dp</dimen>

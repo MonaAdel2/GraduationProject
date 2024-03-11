@@ -12,4 +12,7 @@
     <string name="login_frg_login_button">Login</string>
     <string name="login_frg_send_verification_code_button">Send Code</string>
     <string name="login_frg_verify_code_button">Verify</string>
+
+    <string name="sender_name">Sender Name</string>
+    <string name="receiver_name">Receiver Name</string>
 </resources>

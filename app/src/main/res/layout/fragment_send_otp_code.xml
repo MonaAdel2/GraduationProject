@@ -4,13 +4,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".authentication.view.SendOTPCodeFragment">
+    tools:context=".authentication.view.SendOTPCodeFragment"
+    android:background="@color/background">
 
+
+    <ImageView
+        android:id="@+id/img_verification_icon"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="100dp"
+        android:src="@drawable/phone_number_icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_verification_welcome_msg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Enter your phone number"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/headline2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_verification_icon" />
 
     <com.hbb20.CountryCodePicker
         android:id="@+id/countryCode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
         app:ccpDialog_showNameCode="false"
         app:ccpDialog_showPhoneCode="true"
         app:ccp_autoDetectLanguage="true"
@@ -19,18 +44,54 @@
         app:ccp_hintExampleNumber="true"
         app:ccp_showNameCode="false"
         app:ccp_showPhoneCode="true"
+        app:ccp_contentColor="@color/white"
+        app:ccp_arrowColor="@color/white"
+        app:ccpDialog_searchEditTextTint="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/phoneNumberEditText"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/phoneNumberEditText" />
 
-    <EditText
+<!--    <EditText-->
+<!--        android:id="@+id/phoneNumberEditText"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:hint="Enter Phone Number"-->
+<!--        android:inputType="phone"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toEndOf="@+id/countryCode"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/phoneNumberEditText"
+        style="@style/ThemeOverlay.Material3.TextInputEditText.FilledBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Enter Phone Number"
-        android:inputType="phone"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:textColorHint="@color/transparent_white"
+        android:theme="@style/EditTextThemeOverlay"
+        app:boxBackgroundColor="@color/transparent_black"
+        app:boxCornerRadiusBottomEnd="@dimen/editText_corner_radius"
+        app:boxCornerRadiusBottomStart="@dimen/editText_corner_radius"
+        app:boxCornerRadiusTopEnd="@dimen/editText_corner_radius"
+        app:boxCornerRadiusTopStart="@dimen/editText_corner_radius"
+        app:boxStrokeColor="@color/black"
+        app:boxStrokeWidth="0dp"
+        app:endIconMode="clear_text"
+        app:helperTextTextAppearance="@color/white"
+        app:hintTextAppearance="@color/white"
+        app:hintTextColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/countryCode"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_verification_welcome_msg">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/transparent_white" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/sendOtpButton"
@@ -41,6 +102,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
         android:text="@string/login_frg_send_verification_code_button"
+        android:backgroundTint="@color/blue_icon_bg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/countryCode"
         app:layout_constraintTop_toBottomOf="@+id/phoneNumberEditText" />

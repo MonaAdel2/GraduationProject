@@ -74,4 +74,7 @@ dependencies {
     // otp view
 //    implementation("com.github.appsfeature:otp-view:1.0")
     implementation("io.github.chaosleung:pinview:1.4.4")
+    // circular image
+    implementation ("de.hdodenhof:circleimageview:3.1.0")
+
 }

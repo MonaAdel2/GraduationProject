@@ -16,4 +16,8 @@
     <string name="receiver_name">Receiver Name</string>
     <string name="register">Register</string>
     <string name="create_an_account_to_access_all_the_features_of_app_name">Create an account to access all the features of Appname!</string>
+    <string name="user_name">Username</string>
+    <string name="password">Password</string>
+    <string name="renter_password">Re-enter Password</string>
+
 </resources>

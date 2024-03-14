@@ -12,7 +12,7 @@
         android:background="@color/background">
 
         <Button
-            android:id="@+id/btn_send_code2"
+            android:id="@+id/btn_verify"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"

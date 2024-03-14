@@ -19,7 +19,7 @@
             android:backgroundTint="@color/blue_icon_bg"
             android:text="@string/send"
             app:layout_constraintEnd_toEndOf="@+id/et_phone_number"
-            app:layout_constraintStart_toStartOf="@+id/countryCodePicker"
+            app:layout_constraintStart_toStartOf="@+id/countery_code_picker"
             app:layout_constraintTop_toBottomOf="@+id/et_phone_number" />
 
         <com.google.android.material.textfield.TextInputLayout
@@ -33,7 +33,7 @@
             app:hintTextColor="@color/blue_icon_bg"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.157"
-            app:layout_constraintStart_toEndOf="@+id/countryCodePicker"
+            app:layout_constraintStart_toEndOf="@+id/countery_code_picker"
             app:layout_constraintTop_toTopOf="@+id/guideline"
             app:placeholderTextColor="@color/blue_icon_bg"
             app:prefixTextColor="@color/blue_icon_bg"
@@ -65,7 +65,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView" />
 
         <com.hbb20.CountryCodePicker
-            android:id="@+id/countryCodePicker"
+            android:id="@+id/countery_code_picker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"

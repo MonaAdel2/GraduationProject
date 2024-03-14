@@ -19,5 +19,7 @@
     <string name="user_name">Username</string>
     <string name="password">Password</string>
     <string name="renter_password">Re-enter Password</string>
-
+    <string name="OTP_Verification">OTP Verification</string>
+    <string name="enter_phone_number_to_send_one_time_Password">Enter phone number to send one time Password</string>
+    <string name="send">Send </string>
 </resources>

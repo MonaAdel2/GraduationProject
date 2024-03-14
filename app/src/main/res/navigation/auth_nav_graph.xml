@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/auth_nav_graph"
-    app:startDestination="@id/sendOTPCodeFragment">
+    app:startDestination="@id/phoneFragment">
     <fragment
         android:id="@+id/sendOTPCodeFragment"
         android:name="com.example.graduationproject.authentication.view.SendOTPCodeFragment"
@@ -23,4 +23,18 @@
             app:argType="string"
             app:nullable="true" />
     </fragment>
+    <fragment
+        android:id="@+id/phoneFragment"
+        android:name="com.example.graduationproject.authentication.signup.view.PhoneFragment"
+        android:label="fragment_phone"
+        tools:layout="@layout/fragment_phone" >
+        <action
+            android:id="@+id/action_phoneFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.example.graduationproject.authentication.signup.view.registerFragment"
+        android:label="fragment_register"
+        tools:layout="@layout/fragment_register" />
 </navigation>

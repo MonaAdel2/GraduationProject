@@ -21,5 +21,8 @@
     <string name="renter_password">Re-enter Password</string>
     <string name="OTP_Verification">OTP Verification</string>
     <string name="enter_phone_number_to_send_one_time_Password">Enter phone number to send one time Password</string>
-    <string name="send">Send </string>
+    <string name="send">Send</string>
+    <string name="verification_code">Verification Code</string>
+    <string name="we_have_sent_the_verification_code">We have sent the verification code</string>
+    <string name="verify">Verify</string>
 </resources>

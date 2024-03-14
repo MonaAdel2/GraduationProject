@@ -12,7 +12,17 @@
     <string name="login_frg_login_button">Login</string>
     <string name="login_frg_send_verification_code_button">Send Code</string>
     <string name="login_frg_verify_code_button">Verify</string>
-
     <string name="sender_name">Sender Name</string>
     <string name="receiver_name">Receiver Name</string>
+    <string name="register">Register</string>
+    <string name="create_an_account_to_access_all_the_features_of_app_name">Create an account to access all the features of Appname!</string>
+    <string name="user_name">Username</string>
+    <string name="password">Password</string>
+    <string name="renter_password">Re-enter Password</string>
+    <string name="OTP_Verification">OTP Verification</string>
+    <string name="enter_phone_number_to_send_one_time_Password">Enter phone number to send one time Password</string>
+    <string name="send">Send</string>
+    <string name="verification_code">Verification Code</string>
+    <string name="we_have_sent_the_verification_code">We have sent the verification code</string>
+    <string name="verify">Verify</string>
 </resources>

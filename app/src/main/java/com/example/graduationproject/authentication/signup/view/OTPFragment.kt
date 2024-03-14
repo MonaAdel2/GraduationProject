@@ -130,6 +130,7 @@ class OTPFragment : Fragment() {
 
                 }
             }
+
         }
     }
     val  callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {

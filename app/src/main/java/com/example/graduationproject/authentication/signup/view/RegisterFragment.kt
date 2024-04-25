@@ -1,7 +1,5 @@
 package com.example.graduationproject.authentication.signup.view
 
-import android.app.Activity
-import android.content.ContentResolver
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -10,33 +8,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.MimeTypeMap
-import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContract
 import com.example.graduationproject.databinding.FragmentRegisterBinding
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.navigation.fragment.navArgs
+import com.example.graduationproject.authentication.signup.model.UserData
+import com.example.graduationproject.authentication.signup.viewmodel.RegisterFragmentViewModel
 import com.google.android.material.textfield.TextInputLayout
-import com.google.firebase.Firebase
-import com.google.firebase.firestore.DocumentReference
-import com.google.firebase.firestore.firestore
-import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
-import com.google.firebase.storage.storage
 import com.theartofdev.edmodo.cropper.CropImage
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.tasks.await
-import kotlinx.coroutines.withContext
-import java.io.File
 
 
 class RegisterFragment : Fragment() {
     private lateinit var binding : FragmentRegisterBinding
-    private val imageRef = Firebase.storage.reference
-    val db = Firebase.firestore
     private val navArgs: RegisterFragmentArgs by navArgs()
     private lateinit var imageUri: Uri
     private val cropActivityContract = object : ActivityResultContract<Any?, Uri?>(){
@@ -60,35 +43,14 @@ class RegisterFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val registerFragmentViewModel= RegisterFragmentViewModel(requireContext())
         binding.btnRegister.setOnClickListener {
             checkNotEmpty(binding.etUserName)
             checkNotEmpty(binding.etPassword)
             checkNotEmpty(binding.etRePassword)
-            uploadImageToStorage("${navArgs.phoneNumber}", requireContext())
-            val user = hashMapOf(
-                "userName" to binding.etUserName.editText?.text.toString(),
-                "phoneNumber" to navArgs.phoneNumber,
-                "password" to binding.etPassword.editText?.text.toString(),
-                "imageUri" to "images/${navArgs.phoneNumber}$",
-                "userId" to navArgs.phoneId
-            )
-            db.collection("Users").add(user)
-                .addOnSuccessListener {
-                Toast.makeText(requireContext(), "user added", Toast.LENGTH_SHORT).show()
-            }
-                .addOnFailureListener { e ->
-                Toast.makeText(requireContext(), "failed $e", Toast.LENGTH_SHORT).show()
-            }
-            val userPhoneNumber = hashMapOf(
-                "userPhoneNumber" to navArgs.phoneNumber,
-                "userPhoneId" to navArgs.phoneId
-            )
-            db.collection("PhoneNumbers").add(userPhoneNumber).addOnSuccessListener {
-                Toast.makeText(requireContext(), "phone added", Toast.LENGTH_SHORT).show()
-
-            }.addOnFailureListener { e ->
-                Toast.makeText(requireContext(), "phone failed $e", Toast.LENGTH_SHORT).show()
-            }
+            registerFragmentViewModel.uploadImageToStorage(imageUri,"${navArgs.phoneNumber}", requireContext())
+           val userData = UserData(binding.etUserName.editText?.text.toString(),navArgs.phoneNumber,binding.etPassword.editText?.text.toString(),"images/${navArgs.phoneNumber}$",navArgs.phoneId)
+            registerFragmentViewModel.addUser(accessingUser(userData),navArgs.phoneNumber,navArgs.phoneId)
         }
         cropActivityResultLauncher= registerForActivityResult(cropActivityContract){
             it?.let { uri->
@@ -107,15 +69,14 @@ class RegisterFragment : Fragment() {
             input.error=null
         }
     }
-    private fun uploadImageToStorage(fileName:String, context: Context)= CoroutineScope(Dispatchers.IO).launch{
-        try {
-            imageUri?.let {
-                imageRef.child("images/$fileName").putFile(it).await()
-            }
-        }catch (e:Exception){
-            withContext(Dispatchers.Main){
-                Toast.makeText(context, "${e.message}", Toast.LENGTH_SHORT).show()
-            }
-        }
+    private fun accessingUser(userData:UserData): HashMap<String,String>{
+        val user = hashMapOf(
+            "userName" to userData.userName,
+            "phoneNumber" to userData.phoneNumber,
+            "password" to userData.password,
+            "imageUri" to userData.imageUri,
+            "userId" to userData.userId
+        )
+        return user
     }
 }

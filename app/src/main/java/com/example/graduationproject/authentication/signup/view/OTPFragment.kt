@@ -1,10 +1,8 @@
 package com.example.graduationproject.authentication.signup.view
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,13 +11,9 @@ import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.graduationproject.R
+import com.example.graduationproject.authentication.signup.viewmodel.OTPFragmentViewModel
 import com.example.graduationproject.databinding.FragmentOTPBinding
-import com.example.graduationproject.databinding.FragmentPhoneBinding
-import com.google.firebase.FirebaseException
-import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
-import com.google.firebase.auth.FirebaseAuthMissingActivityForRecaptchaException
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthProvider
 
@@ -44,16 +38,21 @@ class OTPFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         auth = FirebaseAuth.getInstance()
         addTextChangeListener()
-
         token = navArgs.phoneData.token
         phoneNumber = navArgs.phoneNumber
         verificationId=navArgs.phoneData.verificationId
+        val otpFragmentViewModel=OTPFragmentViewModel(requireContext(),requireActivity())
+        otpFragmentViewModel.otpVerified.observe(requireActivity()){
+            if(it==true){
+                var action = OTPFragmentDirections.actionOTPFragmentToRegisterFragment(phoneNumber,auth.uid.toString())
+                findNavController().navigate(action)
+            }
+        }
         binding.btnVerify.setOnClickListener {
                 val typedOTP = binding.etNo1.text.toString()+ binding.etNo2.text.toString() + binding.etNo3.text.toString()+ binding.etNo4.text.toString() + binding.etNo5.text.toString() + binding.etNo6.text.toString()
                 if(typedOTP.isNotEmpty()){
                     if(typedOTP.length==6){
-                        val credential: PhoneAuthCredential = PhoneAuthProvider.getCredential( verificationId, typedOTP)
-                        signInWithPhoneAuthCredential(credential)
+                        otpFragmentViewModel.verifyOtp(verificationId,typedOTP)
                         Toast.makeText(requireContext(), "done", Toast.LENGTH_SHORT).show()
                     }else{
                         Toast.makeText(requireContext(), "Please enter all Otp", Toast.LENGTH_SHORT).show()
@@ -118,45 +117,5 @@ class OTPFragment : Fragment() {
         binding.etNo5.addTextChangedListener(EditTextWatcher(binding.etNo5))
         binding.etNo6.addTextChangedListener(EditTextWatcher(binding.etNo6))
     }
-    @SuppressLint("SuspiciousIndentation")
-    private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
-        auth.signInWithCredential(credential).addOnCompleteListener(requireActivity()) { task ->
-            if (task.isSuccessful) {
-                val user = task.result?.user
-                Toast.makeText(requireContext(), "Authenticated successfully", Toast.LENGTH_SHORT).show()
-              var action = OTPFragmentDirections.actionOTPFragmentToRegisterFragment(phoneNumber,auth.uid.toString())
-                findNavController().navigate(action)
 
-            } else {
-                if (task.exception is FirebaseAuthInvalidCredentialsException) {
-
-                }
-            }
-
-        }
-    }
-    val  callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-
-        override fun onVerificationCompleted(credential: PhoneAuthCredential) {
-            Log.d("TAG", "onVerificationCompleted:$credential")
-            signInWithPhoneAuthCredential(credential)
-        }
-
-        override fun onVerificationFailed(e: FirebaseException) {
-            Log.w("TAG", "onVerificationFailed", e)
-            if (e is FirebaseAuthInvalidCredentialsException) {
-            } else if (e is FirebaseTooManyRequestsException) {
-            } else if (e is FirebaseAuthMissingActivityForRecaptchaException) {
-
-            }
-        }
-        override fun onCodeSent(
-            verificationId: String,
-            token: PhoneAuthProvider.ForceResendingToken,
-        ) {
-            Log.d("TAG", "onCodeSent:$verificationId")
-            var Otp = verificationId
-            var Otptoken= token
-        }
-    }
 }

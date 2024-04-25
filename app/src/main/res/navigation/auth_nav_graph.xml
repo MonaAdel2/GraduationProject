@@ -31,12 +31,10 @@
         <action
             android:id="@+id/action_phoneFragment_to_OTPFragment"
             app:destination="@id/OTPFragment" />
+        <action
+            android:id="@+id/action_phoneFragment_to_sendOTPCodeFragment"
+            app:destination="@id/sendOTPCodeFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/registerFragment"
-        android:name="com.example.graduationproject.authentication.signup.view.registerFragment"
-        android:label="fragment_register"
-        tools:layout="@layout/fragment_register" />
     <fragment
         android:id="@+id/OTPFragment"
         android:name="com.example.graduationproject.authentication.signup.view.OTPFragment"
@@ -48,5 +46,17 @@
         <action
             android:id="@+id/action_OTPFragment_to_registerFragment"
             app:destination="@id/registerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.example.graduationproject.authentication.signup.view.RegisterFragment"
+        android:label="fragment_register"
+        tools:layout="@layout/fragment_register" >
+        <argument
+            android:name="phoneNumber"
+            app:argType="string" />
+        <argument
+            android:name="phoneId"
+            app:argType="string" />
     </fragment>
 </navigation>

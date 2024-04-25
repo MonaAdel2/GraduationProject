@@ -1,5 +1,6 @@
 package com.example.graduationproject.authentication.signup.view
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -117,13 +118,14 @@ class OTPFragment : Fragment() {
         binding.etNo5.addTextChangedListener(EditTextWatcher(binding.etNo5))
         binding.etNo6.addTextChangedListener(EditTextWatcher(binding.etNo6))
     }
+    @SuppressLint("SuspiciousIndentation")
     private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
         auth.signInWithCredential(credential).addOnCompleteListener(requireActivity()) { task ->
             if (task.isSuccessful) {
                 val user = task.result?.user
                 Toast.makeText(requireContext(), "Authenticated successfully", Toast.LENGTH_SHORT).show()
-             /*   var action = OtpFragmentDirections.actionOtpFragmentToSignupFragment2(phoneNumber)
-                findNavController().navigate(action)*/
+              var action = OTPFragmentDirections.actionOTPFragmentToRegisterFragment(phoneNumber,auth.uid.toString())
+                findNavController().navigate(action)
 
             } else {
                 if (task.exception is FirebaseAuthInvalidCredentialsException) {

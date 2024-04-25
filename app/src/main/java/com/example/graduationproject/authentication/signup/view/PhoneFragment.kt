@@ -9,10 +9,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.graduationproject.R
 import com.example.graduationproject.authentication.signup.model.PhoneData
 import com.example.graduationproject.databinding.FragmentPhoneBinding
+import com.google.firebase.Firebase
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.FirebaseAuth
@@ -21,12 +23,20 @@ import com.google.firebase.auth.FirebaseAuthMissingActivityForRecaptchaException
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
+import com.google.firebase.firestore.firestore
+import com.google.firebase.storage.storage
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.concurrent.TimeUnit
 
 class PhoneFragment : Fragment() {
     private lateinit var binding: FragmentPhoneBinding
     private lateinit var phoneNumber:String
     private lateinit var auth: FirebaseAuth
+    private  val db = Firebase.firestore
+    private var phoneExistFlag :Boolean =false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,8 +52,14 @@ class PhoneFragment : Fragment() {
         phoneNumber = binding.etPhoneNumber.editText?.text?.trim().toString()
         binding.btnSendCode.setOnClickListener {
             if(binding.etPhoneNumber.editText?.text?.length!=10){
-                binding.etPhoneNumber.editText?.error="Phone number isn't correct "
-            }else{
+                binding.etPhoneNumber.editText?.error="Phone number isn't correct"
+            }else if(checkPhoneExistsOrNot("+" +binding.counteryCodePicker.selectedCountryCode.toString()+ binding.etPhoneNumber.editText?.text?.toString()))
+            {
+                Toast.makeText(requireContext(), "${checkPhoneExistsOrNot("+" +binding.counteryCodePicker.selectedCountryCode.toString()+ binding.etPhoneNumber.editText?.text?.toString())} value", Toast.LENGTH_SHORT).show()
+                val action = PhoneFragmentDirections.actionPhoneFragmentToSendOTPCodeFragment()
+                findNavController().navigate(action)
+            }
+            else{
                 phoneNumber= "+" +binding.counteryCodePicker.selectedCountryCode.toString()+ binding.etPhoneNumber.editText?.text?.toString()
                 Toast.makeText(requireContext(), "$phoneNumber", Toast.LENGTH_SHORT).show()
                 val options = PhoneAuthOptions.newBuilder(auth)
@@ -60,21 +76,10 @@ class PhoneFragment : Fragment() {
   private val  callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
 
         override fun onVerificationCompleted(credential: PhoneAuthCredential) {
-            // This callback will be invoked in two situations:
-            // 1 - Instant verification. In some cases the phone number can be instantly
-            //     verified without needing to send or enter a verification code.
-            // 2 - Auto-retrieval. On some devices Google Play services can automatically
-            //     detect the incoming verification SMS and perform verification without
-            //     user action.
-           // Log.d(TAG, "onVerificationCompleted:$credential")
             signInWithPhoneAuthCredential(credential)
         }
 
         override fun onVerificationFailed(e: FirebaseException) {
-            // This callback is invoked in an invalid request for verification is made,
-            // for instance if the the phone number format is not valid.
-           // Log.w(TAG, "onVerificationFailed", e)
-
             if (e is FirebaseAuthInvalidCredentialsException) {
                 Log.d("TAG", "onVerificationFailed: $e")
             } else if (e is FirebaseTooManyRequestsException) {
@@ -82,42 +87,48 @@ class PhoneFragment : Fragment() {
             } else if (e is FirebaseAuthMissingActivityForRecaptchaException) {
                 Log.d("TAG", "onVerificationFailed: $e")
             }
-
-            // Show a message and update the UI
         }
 
         override fun onCodeSent(
             verificationId: String,
             token: PhoneAuthProvider.ForceResendingToken,
         ) {
-            // The SMS verification code has been sent to the provided phone number, we
-            // now need to ask the user to enter the code and then construct a credential
-            // by combining the code with a verification ID.
-    //        Log.d(TAG, "onCodeSent:$verificationId")
-
-            // Save verification ID and resending token so we can use them later
           val  storedVerificationId = verificationId
             val  resendToken = token
             val action = PhoneFragmentDirections.actionPhoneFragmentToOTPFragment(PhoneData(token,verificationId,phoneNumber))
+
             findNavController().navigate(action)
         }
     }
     private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
         auth.signInWithCredential(credential).addOnCompleteListener(requireActivity()){ task ->
                 if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                  //  Log.d(TAG, "signInWithCredential:success")
-
                     val user = task.result?.user
                 } else {
-                    // Sign in failed, display a message and update the UI
-                //    Log.w(TAG, "signInWithCredential:failure", task.exception)
                     if (task.exception is FirebaseAuthInvalidCredentialsException) {
-                        // The verification code entered was invalid
+                        Log.d("exception", "signInWithPhoneAuthCredential:${task.exception} ")
                     }
-                    // Update UI
+
                 }
             }
     }
+   private fun checkPhoneExistsOrNot(phoneNumber:String):Boolean{
+       lifecycleScope.launch {
+           db.collection("PhoneNumbers").get().addOnSuccessListener(){ result ->
+               for(document in result){
+                   if(phoneNumber==document.get("userPhoneNumber")){
+                       Toast.makeText(requireContext(), "user has an account", Toast.LENGTH_SHORT).show()
+                       phoneExistFlag= true
+                       Toast.makeText(requireContext(), "$phoneExistFlag value is ", Toast.LENGTH_SHORT).show()
+                       break
+                   }else {
+                       phoneExistFlag = false
+                   }
+               }
+           }
+       }
+       Toast.makeText(requireContext(), "$phoneExistFlag value is ", Toast.LENGTH_SHORT).show()
 
+       return phoneExistFlag
+    }
 }

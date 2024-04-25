@@ -4,21 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".authentication.signup.view.registerFragment">
+    tools:context=".authentication.signup.view.RegisterFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/background">
-
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/iv_profile"
-            android:layout_width="96dp"
-            android:layout_height="96dp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="50dp"
             android:layout_marginTop="20dp"
+            android:layout_marginEnd="50dp"
             android:src="@drawable/ic_profile"
             app:civ_border_color="#FF000000"
             app:civ_border_width="0dp"
+            app:layout_constraintDimensionRatio="16:9"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
@@ -62,7 +64,7 @@
 
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/et_full_name"
+            android:id="@+id/et_user_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -106,7 +108,7 @@
             app:hintTextColor="@color/blue_icon_bg"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_full_name"
+            app:layout_constraintTop_toBottomOf="@+id/et_user_name"
             app:passwordToggleEnabled="true"
             app:passwordToggleTint="@color/blue_icon_bg"
             app:placeholderTextColor="@color/blue_icon_bg"

@@ -46,7 +46,7 @@ class OTPFragment : Fragment() {
         addTextChangeListener()
 
         token = navArgs.phoneData.token
-        phoneNumber = navArgs.phoneData.phoneNumber
+        phoneNumber = navArgs.phoneNumber
         verificationId=navArgs.phoneData.verificationId
         binding.btnVerify.setOnClickListener {
                 val typedOTP = binding.etNo1.text.toString()+ binding.etNo2.text.toString() + binding.etNo3.text.toString()+ binding.etNo4.text.toString() + binding.etNo5.text.toString() + binding.etNo6.text.toString()

@@ -7,19 +7,17 @@ import com.google.firebase.auth.PhoneAuthProvider
 data class PhoneData(
     var token: PhoneAuthProvider.ForceResendingToken,
     var verificationId: String,
-    var phoneNumber: String
+
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readParcelable(PhoneAuthProvider.ForceResendingToken::class.java.classLoader)!!,
         parcel.readString().toString(),
-        parcel.readString().toString()
     ) {
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeParcelable(token, flags)
         parcel.writeString(verificationId)
-        parcel.writeString(phoneNumber)
     }
 
     override fun describeContents(): Int {

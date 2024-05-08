@@ -7,7 +7,20 @@
 
     <fragment
         android:id="@+id/chatFragment"
-        android:name="com.example.graduationproject.ChatFragment"
+        android:name="com.example.graduationproject.chat.view.ChatFragment"
         android:label="fragment_chat"
-        tools:layout="@layout/fragment_chat" />
+        tools:layout="@layout/fragment_chat" >
+        <argument
+            android:name="User"
+            app:argType="com.example.graduationproject.models.User" />
+    </fragment>
+    <fragment
+        android:id="@+id/home2"
+        android:name="com.example.graduationproject.Home"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_home2_to_chatFragment"
+            app:destination="@id/chatFragment" />
+    </fragment>
 </navigation>

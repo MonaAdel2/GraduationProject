@@ -1,7 +1,9 @@
-package com.example.graduationproject
+package com.example.graduationproject.chat
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.graduationproject.Utils
+import com.example.graduationproject.chat.model.Message
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 

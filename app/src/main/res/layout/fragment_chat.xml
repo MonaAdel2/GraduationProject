@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.graduationproject.chat.viewModel.ChatViewModel" />
+    </data>
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ChatFragment"
+    tools:context=".chat.view.ChatFragment"
     android:background="@color/background">
 
     <de.hdodenhof.circleimageview.CircleImageView
@@ -138,3 +146,4 @@
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

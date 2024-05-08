@@ -1,14 +1,13 @@
-package com.example.graduationproject.authentication
+package com.example.graduationproject.chat.view
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.graduationproject.Message
 import com.example.graduationproject.R
 import com.example.graduationproject.Utils
-import com.google.firebase.firestore.FirebaseFirestore
+import com.example.graduationproject.chat.model.Message
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale

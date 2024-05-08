@@ -1,4 +1,4 @@
-package com.example.graduationproject
+package com.example.graduationproject.chat.model
 
 data class Message(
     val sender: String? = "",

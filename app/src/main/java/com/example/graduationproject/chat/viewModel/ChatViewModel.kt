@@ -1,4 +1,4 @@
-package com.example.graduationproject
+package com.example.graduationproject.chat.viewModel
 
 import android.content.Context
 import android.util.Log
@@ -6,6 +6,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.graduationproject.SharedPrefs
+import com.example.graduationproject.Utils
+import com.example.graduationproject.chat.MessageRepo
+import com.example.graduationproject.chat.model.Message
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

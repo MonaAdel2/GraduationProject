@@ -3,6 +3,8 @@ package com.example.graduationproject.authentication.signup.viewmodel
 import android.content.Context
 import android.net.Uri
 import android.widget.Toast
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.Firebase
@@ -18,6 +20,8 @@ import kotlinx.coroutines.withContext
 class RegisterFragmentViewModel(val context: Context):ViewModel() {
     private val imageRef = Firebase.storage.reference
     val db = Firebase.firestore
+    private val _userAdded = MutableLiveData<Boolean>()
+    val userAdded: LiveData<Boolean> = _userAdded
     fun uploadImageToStorage(imageUri:Uri,fileName:String, context: Context){
         viewModelScope.launch {
             try {
@@ -37,6 +41,7 @@ class RegisterFragmentViewModel(val context: Context):ViewModel() {
             db.collection("Users").add(user)
                 .addOnSuccessListener {
                     Toast.makeText(context, "user added", Toast.LENGTH_SHORT).show()
+                    _userAdded.value=true
                 }
                 .addOnFailureListener { e ->
                     Toast.makeText(context, "failed $e", Toast.LENGTH_SHORT).show()

@@ -43,6 +43,7 @@ class UsersFragment : Fragment() {
         userFragmentViewModel.getUsers()
         usersRV= binding.rvUsers
 
+
         userFragmentViewModel.userList.observe(requireActivity()){
             val adapter=UsersAdapter(it,requireContext())
             usersRV.adapter= adapter

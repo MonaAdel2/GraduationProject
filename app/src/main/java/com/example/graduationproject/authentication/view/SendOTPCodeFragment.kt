@@ -70,9 +70,9 @@ class SendOTPCodeFragment : Fragment() {
         authViewModel.verificationCode.observe(viewLifecycleOwner) {
             if (it != null) {
                 Log.d(TAG, "onCreate: it is the verification id : $it")
-                val action =
-                    SendOTPCodeFragmentDirections.actionSendOTPCodeFragmentToLoginFragment(it)
-                findNavController().navigate(action)
+            val action =
+                  SendOTPCodeFragmentDirections.actionSendOTPCodeFragmentToLoginFragment(it)
+             findNavController().navigate(action)
 
             } else {
                 Log.d(TAG, "onCreate: the verification id is null")

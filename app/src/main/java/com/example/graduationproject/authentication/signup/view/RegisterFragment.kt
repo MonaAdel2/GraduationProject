@@ -8,8 +8,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContract
+import androidx.navigation.fragment.findNavController
 import com.example.graduationproject.databinding.FragmentRegisterBinding
 import androidx.navigation.fragment.navArgs
 import com.example.graduationproject.authentication.signup.model.UserData
@@ -48,17 +50,24 @@ class RegisterFragment : Fragment() {
             checkNotEmpty(binding.etUserName)
             checkNotEmpty(binding.etPassword)
             checkNotEmpty(binding.etRePassword)
+            Toast.makeText(requireContext(), "$imageUri", Toast.LENGTH_SHORT).show()
             registerFragmentViewModel.uploadImageToStorage(imageUri,"${navArgs.phoneNumber}", requireContext())
            val userData = UserData(binding.etUserName.editText?.text.toString(),navArgs.phoneNumber,binding.etPassword.editText?.text.toString(),"images/${navArgs.phoneNumber}$",navArgs.phoneId)
             registerFragmentViewModel.addUser(accessingUser(userData),navArgs.phoneNumber,navArgs.phoneId)
         }
+        registerFragmentViewModel.userAdded.observe(requireActivity()){
+            if(it==true){
+                val action = RegisterFragmentDirections.actionRegisterFragmentToAppNavGraph()
+                findNavController().navigate(action)
+            }
+        }
         cropActivityResultLauncher= registerForActivityResult(cropActivityContract){
             it?.let { uri->
-                binding.ivProfile.setImageURI(uri)
+                binding.ivUserPicture.setImageURI(uri)
                 imageUri=uri
             }
         }
-        binding.ivProfile.setOnClickListener {
+        binding.ivUserPicture.setOnClickListener {
             cropActivityResultLauncher.launch(null)
         }
     }

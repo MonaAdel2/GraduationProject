@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/app_nav_graph"
-    app:startDestination="@id/chatFragment">
+    app:startDestination="@id/HomeFragment">
 
     <fragment
         android:id="@+id/chatFragment"
@@ -11,16 +11,31 @@
         android:label="fragment_chat"
         tools:layout="@layout/fragment_chat" >
         <argument
-            android:name="User"
-            app:argType="com.example.graduationproject.models.User" />
+            android:name="userId"
+            app:argType="string" />
+        <argument
+            android:name="UserData"
+            app:argType="com.example.graduationproject.authentication.signup.model.UserData" />
     </fragment>
     <fragment
-        android:id="@+id/home2"
-        android:name="com.example.graduationproject.Home"
+        android:id="@+id/HomeFragment"
+        android:name="com.example.graduationproject.home.view.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
-            android:id="@+id/action_home2_to_chatFragment"
+            android:id="@+id/action_home3_to_chatFragment"
+            app:destination="@id/chatFragment" />
+        <action
+            android:id="@+id/action_HomeFragment_to_usersFragment"
+            app:destination="@id/usersFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/usersFragment"
+        android:name="com.example.graduationproject.home.view.UsersFragment"
+        android:label="fragment_users"
+        tools:layout="@layout/fragment_users" >
+        <action
+            android:id="@+id/action_usersFragment_to_chatFragment2"
             app:destination="@id/chatFragment" />
     </fragment>
 </navigation>

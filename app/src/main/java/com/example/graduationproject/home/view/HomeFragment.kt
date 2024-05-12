@@ -15,6 +15,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 class HomeFragment : Fragment() {
  private lateinit var userBtn: FloatingActionButton
 private lateinit var  binding : FragmentHomeBinding
+private lateinit var recordBtn: FloatingActionButton
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -28,6 +29,11 @@ private lateinit var  binding : FragmentHomeBinding
         userBtn=binding.btnShowUsers
         userBtn.setOnClickListener {
             val action = HomeFragmentDirections.actionHomeFragmentToUsersFragment()
+            findNavController().navigate(action)
+        }
+        recordBtn=binding.btnRecorder
+        recordBtn.setOnClickListener {
+            val action = HomeFragmentDirections.actionHomeFragmentToRecorderFragment()
             findNavController().navigate(action)
         }
 

@@ -28,6 +28,9 @@
         <action
             android:id="@+id/action_HomeFragment_to_usersFragment"
             app:destination="@id/usersFragment" />
+        <action
+            android:id="@+id/action_HomeFragment_to_recorderFragment"
+            app:destination="@id/recorderFragment" />
     </fragment>
     <fragment
         android:id="@+id/usersFragment"
@@ -38,4 +41,9 @@
             android:id="@+id/action_usersFragment_to_chatFragment2"
             app:destination="@id/chatFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/recorderFragment"
+        android:name="com.example.graduationproject.home.view.RecorderFragment"
+        android:label="fragment_recorder"
+        tools:layout="@layout/fragment_recorder" />
 </navigation>

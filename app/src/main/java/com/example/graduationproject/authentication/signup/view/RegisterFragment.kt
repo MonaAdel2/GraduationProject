@@ -81,13 +81,14 @@ class RegisterFragment : Fragment() {
         }
         cropActivityResultLauncher= registerForActivityResult(cropActivityContract){
             it?.let { uri->
-                binding.ivUserPicture.setImageURI(uri)
+
 //                imageUri=uri
                 // new added code
                 val source = ImageDecoder.createSource(requireActivity().contentResolver, uri)
                 val bitmap = ImageDecoder.decodeBitmap(source)
                 registerFragmentViewModel.uploadImageToFirebaseStorage(bitmap){
                     imageLink = it
+                    binding.ivUserPicture.setImageURI(uri)
                 }
             }
         }

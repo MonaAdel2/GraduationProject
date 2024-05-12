@@ -1,7 +1,10 @@
 package com.example.graduationproject.chat.viewModel
 
 import android.content.Context
+import android.graphics.Bitmap
+import android.net.Uri
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,8 +14,12 @@ import com.example.graduationproject.Utils
 import com.example.graduationproject.chat.MessageRepo
 import com.example.graduationproject.chat.model.Message
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.io.ByteArrayOutputStream
+import java.util.UUID
 
 class ChatViewModel(val context: Context): ViewModel() {
 
@@ -25,6 +32,13 @@ class ChatViewModel(val context: Context): ViewModel() {
     val message = MutableLiveData<String>()
 
     private val fireStore = FirebaseFirestore.getInstance()
+    private var storage: FirebaseStorage = FirebaseStorage.getInstance()
+    private var storageRef: StorageReference = storage.reference
+
+    private var _uri = MutableLiveData<Uri>()
+    private var uri: LiveData<Uri> = _uri
+    private var bitmap: Bitmap? = null
+
 
     init {
         fireStore.collection("Users").document(Utils.getUidLoggedIn()).get().addOnSuccessListener {
@@ -45,7 +59,8 @@ class ChatViewModel(val context: Context): ViewModel() {
                 "sender" to sender,
                 "receiver" to receiver,
                 "message" to message.value!!,
-                "time" to Utils.getTime()
+                "time" to Utils.getTime(),
+                "image" to "false"
             )
 
             val uniqueID = listOf(sender, receiver).sorted()
@@ -134,4 +149,66 @@ class ChatViewModel(val context: Context): ViewModel() {
     fun getMessages(friendId: String): LiveData<List<Message>> {
         return messageRepo.getMessages(friendId)
     }
+
+    fun sendMedia(sender: String, receiver: String, friendName: String, friendImage: String , imageUri: String){
+
+        viewModelScope.launch {
+            var hashmap = hashMapOf<String, Any>(
+                "sender" to sender,
+                "receiver" to receiver,
+                "message" to imageUri,
+                "time" to Utils.getTime(),
+                "image" to "true"
+            )
+
+            val uniqueID = listOf(sender, receiver).sorted()
+            uniqueID.joinToString(separator = "")
+
+            val friendNameSplit = friendName.split("\\s".toRegex())[0]
+            val mySharedPrefs = SharedPrefs(context)
+            mySharedPrefs.setValue("friendId", receiver)
+            mySharedPrefs.setValue("chatRoomId", uniqueID.toString())
+            mySharedPrefs.setValue("friendName", friendNameSplit)
+            mySharedPrefs.setValue("friendImage", friendImage)
+
+            fireStore.collection("Messages").document(uniqueID.toString())
+                .collection("Chats").document(Utils.getTime())
+                .set(hashmap).addOnSuccessListener {
+
+                }
+        }
+
+    }
+
+    fun uploadImageToFirebaseStorage(imageBitmap: Bitmap?, friendId: String ,onSuccess: (imageUrl: String) -> Unit) {
+
+        viewModelScope.launch {
+            if (imageBitmap != null) {
+                val baos = ByteArrayOutputStream()
+                imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+                val data = baos.toByteArray()
+
+                val uniqueID = listOf(Utils.getUidLoggedIn(), friendId).sorted()
+                uniqueID.joinToString(separator = "")
+
+                bitmap = imageBitmap
+//            binding.btnUploadImgRegister.setImageBitmap(imageBitmap)
+                val storagePath = storageRef.child("chats_media/${uniqueID}/images/${UUID.randomUUID()}.jpg")
+                val uploadTask = storagePath.putBytes(data)
+                uploadTask.addOnSuccessListener { taskSnapshot ->
+                    storagePath.downloadUrl.addOnSuccessListener { imageLink ->
+                        val imageUrl = imageLink.toString()
+                        _uri.value = imageLink
+                        onSuccess(imageUrl) // Pass the imageUrl to the callback function
+                    }
+                }.addOnFailureListener { exception ->
+                    Log.d(TAG, "uploadImageToFirebaseStorage: Failed to upload the message ${exception.message}")
+                }
+            } else {
+                // If imageBitmap is null, don't attempt to upload the image
+                Log.d(TAG, "uploadImageToFirebaseStorage: Image is null")
+            }
+        }
+        }
+
 }

@@ -16,6 +16,9 @@
         <argument
             android:name="UserData"
             app:argType="com.example.graduationproject.authentication.signup.model.UserData" />
+        <action
+            android:id="@+id/action_chatFragment_to_displayImageFragment"
+            app:destination="@id/displayImageFragment" />
     </fragment>
     <fragment
         android:id="@+id/HomeFragment"
@@ -37,5 +40,17 @@
         <action
             android:id="@+id/action_usersFragment_to_chatFragment2"
             app:destination="@id/chatFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/displayImageFragment"
+        android:name="com.example.graduationproject.chat.view.DisplayImageFragment"
+        android:label="fragment_display_image"
+        tools:layout="@layout/fragment_display_image" >
+        <action
+            android:id="@+id/action_displayImageFragment_to_chatFragment"
+            app:destination="@id/chatFragment" />
+        <argument
+            android:name="imageUri"
+            app:argType="string" />
     </fragment>
 </navigation>

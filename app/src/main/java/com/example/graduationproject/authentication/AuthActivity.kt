@@ -1,4 +1,4 @@
-package com.example.graduationproject.authentication.view
+package com.example.graduationproject.authentication
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

@@ -37,6 +37,8 @@
             android:paddingVertical="12dp"
             android:text="The message will be displayed here\nThe message will be displayed here\nThe message will be displayed here\nThe message will be displayed here"
             android:textColor="@color/white"
+            android:singleLine="false"
+            android:maxWidth="300dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"

@@ -87,10 +87,11 @@ class ChatViewModel(val context: Context): ViewModel() {
                         "message" to message.value!!,
                         "friendImage" to friendImage,
                         "name" to friendName,
-                        "person" to "you"
+                        "person" to "you",
+                        "image" to "false"
                     )
 
-                    fireStore.collection("Conversation${Utils.getUidLoggedIn()}").document(receiver)
+                    fireStore.collection("RecentChatsOf_${Utils.getUidLoggedIn()}").document(receiver)
                         .set(hashmapForRecent)
                     Log.d(
                         TAG,
@@ -98,7 +99,7 @@ class ChatViewModel(val context: Context): ViewModel() {
                     )
 
                     Log.d(TAG, "sendMessage: ${message.value!!}")
-                    val conversationRef = fireStore.collection("Conversation${receiver}")
+                    val recentChatsRef = fireStore.collection("RecentChatsOf_${receiver}")
                         .document(Utils.getUidLoggedIn())
                         .get().addOnSuccessListener { documentSnapshot ->
                             Log.d(
@@ -109,12 +110,13 @@ class ChatViewModel(val context: Context): ViewModel() {
                                 // Document exists, perform the update
                                 Log.d(TAG, "sendMessage: inside if condition of exists()")
                                 Log.d(TAG, "sendMessage: in if ${message.value!!}")
-                                fireStore.collection("Conversation${receiver}")
+                                fireStore.collection("RecentChatsOf_${receiver}")
                                     .document(Utils.getUidLoggedIn())
                                     .update(
                                         "message", tempMessage,
                                         "time", Utils.getTime(),
-                                        "person", name.value!!
+                                        "person", name.value!!,
+                                        "image" to "false"
                                     )
 
                             } else {
@@ -128,9 +130,10 @@ class ChatViewModel(val context: Context): ViewModel() {
                                     "message" to tempMessage,
                                     "friendImage" to imageUrl.value!!,
                                     "name" to name.value!!,
-                                    "person" to name.value!!
+                                    "person" to name.value!!,
+                                    "image" to "false"
                                 )
-                                fireStore.collection("Conversation${receiver}")
+                                fireStore.collection("RecentChatsOf_${receiver}")
                                     .document(Utils.getUidLoggedIn()).set(data)
 
                             }
@@ -173,8 +176,59 @@ class ChatViewModel(val context: Context): ViewModel() {
 
             fireStore.collection("Messages").document(uniqueID.toString())
                 .collection("Chats").document(Utils.getTime())
-                .set(hashmap).addOnSuccessListener {
+                .set(hashmap).addOnSuccessListener {task->
+                    val hashmapForRecent = hashMapOf<String, Any>(
+                        "friendId" to receiver,
+                        "time" to Utils.getTime(),
+                        "sender" to Utils.getUidLoggedIn(),
+                        "message" to imageUri,
+                        "friendImage" to friendImage,
+                        "name" to friendName,
+                        "person" to "you",
+                        "image" to "true"
+                    )
 
+                    fireStore.collection("RecentChatsOf_${Utils.getUidLoggedIn()}").document(receiver)
+                        .set(hashmapForRecent)
+                    Log.d(TAG, "sendMessage: create the recent chat for user ${Utils.getUidLoggedIn()}")
+
+//                    Log.d(TAG, "sendMessage: ${message.value!!}")
+                    val recentChatsRef = fireStore.collection("RecentChatsOf_${receiver}")
+                        .document(Utils.getUidLoggedIn())
+                        .get().addOnSuccessListener { documentSnapshot ->
+                            Log.d(TAG, "sendMessage: get the reference to the collection of receiver")
+                            if (documentSnapshot.exists()) {
+                                // Document exists, perform the update
+
+                                fireStore.collection("RecentChatsOf_${receiver}")
+                                    .document(Utils.getUidLoggedIn())
+                                    .update(
+                                        "message", imageUri,
+                                        "time", Utils.getTime(),
+                                        "person", name.value!!,
+                                        "image" , "true"
+                                    )
+
+                            } else {
+                                // Document does not exist, create it first
+                                Log.d(TAG, "sendMessage: inside else ")
+                                Log.d(TAG, "sendMessage: in else ${message.value!!}")
+                                val data = hashMapOf(
+                                    "friendId" to Utils.getUidLoggedIn(),
+                                    "time" to Utils.getTime(),
+                                    "sender" to Utils.getUidLoggedIn(),
+                                    "message" to imageUri,
+                                    "friendImage" to imageUrl.value!!,
+                                    "name" to name.value!!,
+                                    "person" to name.value!!,
+                                    "image" to "true"
+                                )
+                                fireStore.collection("RecentChatsOf_${receiver}")
+                                    .document(Utils.getUidLoggedIn()).set(data)
+
+                            }
+
+                        }
                 }
         }
 

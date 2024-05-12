@@ -31,6 +31,9 @@
         <action
             android:id="@+id/action_HomeFragment_to_usersFragment"
             app:destination="@id/usersFragment" />
+        <action
+            android:id="@+id/action_HomeFragment_to_recorderFragment"
+            app:destination="@id/recorderFragment" />
     </fragment>
     <fragment
         android:id="@+id/usersFragment"
@@ -53,4 +56,9 @@
             android:name="imageUri"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/recorderFragment"
+        android:name="com.example.graduationproject.home.view.RecorderFragment"
+        android:label="fragment_recorder"
+        tools:layout="@layout/fragment_recorder" />
 </navigation>

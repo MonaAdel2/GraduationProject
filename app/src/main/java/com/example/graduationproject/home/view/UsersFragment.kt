@@ -50,7 +50,8 @@ class UsersFragment : Fragment() {
             usersRV.layoutManager = LinearLayoutManager(requireContext(),  RecyclerView.VERTICAL, false)
             adapter.setOnClickListener(object : UsersAdapter.OnItemClickListener {
                 override fun onItemClicked(userData: UserData) {
-                    val  action = UsersFragmentDirections.actionUsersFragmentToChatFragment2(user?.uid.toString(),userData)
+//                    val  action = UsersFragmentDirections.actionUsersFragmentToChatFragment2(user?.uid.toString(),userData)
+                    val  action = UsersFragmentDirections.actionUsersFragmentToChatFragment2(userData)
                     findNavController().navigate(action)
                 }
             })

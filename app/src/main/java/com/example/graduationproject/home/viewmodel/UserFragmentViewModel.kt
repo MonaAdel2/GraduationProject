@@ -25,7 +25,7 @@ class UserFragmentViewModel(): ViewModel() {
                                 data.data?.get("phoneNumber").toString()
                                 ,    data.data?.get("password").toString(),
                                 data.data?.get("imageUri").toString()
-                               , (data.data?.get("userID").toString())
+                               , (data.data?.get("userId").toString())
                             )
                              users.add(user)
                         }

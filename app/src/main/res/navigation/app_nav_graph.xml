@@ -10,9 +10,9 @@
         android:name="com.example.graduationproject.chat.view.ChatFragment"
         android:label="fragment_chat"
         tools:layout="@layout/fragment_chat" >
-        <argument
-            android:name="userId"
-            app:argType="string" />
+<!--        <argument-->
+<!--            android:name="userId"-->
+<!--            app:argType="string" />-->
         <argument
             android:name="UserData"
             app:argType="com.example.graduationproject.authentication.signup.model.UserData" />

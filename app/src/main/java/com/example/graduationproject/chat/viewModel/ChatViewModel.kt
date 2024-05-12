@@ -22,9 +22,20 @@ class ChatViewModel(val context: Context): ViewModel() {
 
     private val name = MutableLiveData<String>()
     private val imageUrl = MutableLiveData<String>()
-    private val message = MutableLiveData<String>()
+    val message = MutableLiveData<String>()
 
     private val fireStore = FirebaseFirestore.getInstance()
+
+    init {
+        fireStore.collection("Users").document(Utils.getUidLoggedIn()).get().addOnSuccessListener {
+            if (it.exists()){
+                name.value = it.getString("userName")
+                imageUrl.value = it.getString("imageUri")
+            }else{
+                Log.d(TAG, "initial logic in view model: the document can't be found")
+            }
+        }
+    }
 
     fun sendMessage(sender: String, receiver: String, friendName: String, friendImage: String) =
         viewModelScope.launch(Dispatchers.IO) {

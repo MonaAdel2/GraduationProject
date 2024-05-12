@@ -43,11 +43,11 @@ class SendOTPCodeFragment : Fragment() {
         auth = FirebaseAuth.getInstance()
         authViewModel = ViewModelProvider(this)[AuthViewModel::class.java]
 
-//        if (auth.currentUser != null) {
-//            val intent = Intent(requireContext(), MainActivity::class.java)
-//            requireActivity().startActivity(intent)
-//            requireActivity().finish()
-//        }
+        if (auth.currentUser != null) {
+            val intent = Intent(requireContext(), MainActivity::class.java)
+            requireActivity().startActivity(intent)
+            requireActivity().finish()
+        }
         ccp = binding.countryCode
         ccp.registerCarrierNumberEditText(binding.phoneNumberEditText.editText)
 

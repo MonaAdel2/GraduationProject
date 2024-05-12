@@ -112,12 +112,7 @@ class ChatViewModel(val context: Context): ViewModel() {
                                 Log.d(TAG, "sendMessage: in if ${message.value!!}")
                                 fireStore.collection("RecentChatsOf_${receiver}")
                                     .document(Utils.getUidLoggedIn())
-                                    .update(
-                                        "message", tempMessage,
-                                        "time", Utils.getTime(),
-                                        "person", name.value!!,
-                                        "image" to "false"
-                                    )
+                                    .update("message", tempMessage, "time", Utils.getTime(), "person", name.value!!, "image", "false")
 
                             } else {
                                 // Document does not exist, create it first

@@ -43,7 +43,7 @@
         app:ccp_autoDetectLanguage="true"
         app:ccp_clickable="true"
         app:ccp_contentColor="@color/white"
-        app:ccp_defaultNameCode="US"
+        app:ccp_defaultNameCode="Eg"
         app:ccp_hintExampleNumber="true"
         app:ccp_showNameCode="false"
         app:ccp_showPhoneCode="true"
@@ -83,7 +83,8 @@
             android:textColor="@color/white"
             android:textColorHint="@color/transparent_white"
             app:hintTextAppearance="@color/white"
-            app:hintTextColor="@color/white" />
+            app:hintTextColor="@color/white"
+            android:inputType="number"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button

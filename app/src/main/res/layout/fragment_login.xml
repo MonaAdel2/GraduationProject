@@ -38,48 +38,169 @@
         android:id="@+id/btn_verify_otp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/et_otp_code"
+        android:layout_below="@id/guideline3"
         android:layout_marginTop="32dp"
         android:backgroundTint="@color/blue_icon_bg"
         android:text="@string/login_frg_verify_code_button"
-        app:layout_constraintEnd_toEndOf="@+id/et_otp_code"
+        app:layout_constraintEnd_toEndOf="@+id/et_no6"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/et_otp_code"
-        app:layout_constraintTop_toBottomOf="@+id/et_otp_code" />
+        app:layout_constraintStart_toStartOf="@+id/et_no1"
+        app:layout_constraintTop_toBottomOf="@+id/guideline3" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/et_otp_code"
-        style="@style/ThemeOverlay.Material3.TextInputEditText.FilledBox"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        android:textColorHint="@color/transparent_white"
-        android:theme="@style/EditTextThemeOverlay"
-        app:boxBackgroundColor="@color/transparent_black"
-        app:boxCornerRadiusBottomEnd="@dimen/editText_corner_radius"
-        app:boxCornerRadiusBottomStart="@dimen/editText_corner_radius"
-        app:boxCornerRadiusTopEnd="@dimen/editText_corner_radius"
-        app:boxCornerRadiusTopStart="@dimen/editText_corner_radius"
-        app:boxStrokeColor="@color/black"
-        app:boxStrokeWidth="0dp"
-        app:endIconMode="clear_text"
-        app:helperTextTextAppearance="@color/white"
-        app:hintTextAppearance="@color/white"
-        app:hintTextColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
+
+
+    <EditText
+        android:id="@+id/et_no1"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/digit_background"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/guideline3"
+        app:layout_constraintEnd_toStartOf="@+id/et_no2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_verification_welcome_msg">
+        app:layout_constraintTop_toTopOf="@+id/guideline2" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:textColorHint="@color/transparent_white"
-            app:hintTextAppearance="@color/white"
-            app:hintTextColor="@color/white" />
-    </com.google.android.material.textfield.TextInputLayout>
+    <EditText
+        android:id="@+id/et_no2"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/digit_background"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/guideline3"
+        app:layout_constraintEnd_toStartOf="@+id/et_no3"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/et_no1"
+        app:layout_constraintTop_toTopOf="@+id/guideline2" />
+
+    <EditText
+        android:id="@+id/et_no3"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/digit_background"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/guideline3"
+        app:layout_constraintEnd_toStartOf="@+id/et_no4"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/et_no2"
+        app:layout_constraintTop_toTopOf="@+id/guideline2" />
+
+    <EditText
+        android:id="@+id/et_no4"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/digit_background"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/guideline3"
+        app:layout_constraintEnd_toStartOf="@+id/et_no5"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/et_no3"
+        app:layout_constraintTop_toTopOf="@+id/guideline2" />
+
+    <EditText
+        android:id="@+id/et_no5"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/digit_background"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/guideline3"
+        app:layout_constraintEnd_toStartOf="@+id/et_no6"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/et_no4"
+        app:layout_constraintTop_toTopOf="@+id/guideline2" />
+
+    <EditText
+        android:id="@+id/et_no6"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/digit_background"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/guideline3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/et_no5"
+        app:layout_constraintTop_toTopOf="@+id/guideline2" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintGuide_begin="400dp"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintGuide_begin="550dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5" />
+
+
+<!--    <com.google.android.material.textfield.TextInputLayout-->
+<!--        android:id="@+id/et_otp_code"-->
+<!--        style="@style/ThemeOverlay.Material3.TextInputEditText.FilledBox"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="32dp"-->
+<!--        android:layout_marginTop="32dp"-->
+<!--        android:layout_marginEnd="32dp"-->
+<!--        android:textColorHint="@color/transparent_white"-->
+<!--        android:theme="@style/EditTextThemeOverlay"-->
+<!--        app:boxBackgroundColor="@color/transparent_black"-->
+<!--        app:boxCornerRadiusBottomEnd="@dimen/editText_corner_radius"-->
+<!--        app:boxCornerRadiusBottomStart="@dimen/editText_corner_radius"-->
+<!--        app:boxCornerRadiusTopEnd="@dimen/editText_corner_radius"-->
+<!--        app:boxCornerRadiusTopStart="@dimen/editText_corner_radius"-->
+<!--        app:boxStrokeColor="@color/black"-->
+<!--        app:boxStrokeWidth="0dp"-->
+<!--        app:endIconMode="clear_text"-->
+<!--        app:helperTextTextAppearance="@color/white"-->
+<!--        app:hintTextAppearance="@color/white"-->
+<!--        app:hintTextColor="@color/white"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/tv_verification_welcome_msg">-->
+
+<!--        <com.google.android.material.textfield.TextInputEditText-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:textColorHint="@color/transparent_white"-->
+<!--            app:hintTextAppearance="@color/white"-->
+<!--            app:hintTextColor="@color/white"-->
+<!--            android:inputType="number"/>-->
+<!--    </com.google.android.material.textfield.TextInputLayout>-->
 
 
 <!--    <com.chaos.view.PinView-->

@@ -1,10 +1,14 @@
 package com.example.graduationproject.chat.view
 
+import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.graduationproject.R
 import com.example.graduationproject.Utils
 import com.example.graduationproject.chat.model.Message
@@ -12,12 +16,13 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
-class MessageAdapter : RecyclerView.Adapter<MyViewHolder>() {
+class MessageAdapter(val context: Context) : RecyclerView.Adapter<MyViewHolder>() {
 
     private val TAG = "MessageAdapter"
     var messagesList = listOf<Message>()
     val SENDER = 0
     val RECIEVER = 1
+    private var listener: onImageMessageClicked? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         var inflater = LayoutInflater.from(parent.context)
@@ -36,12 +41,26 @@ class MessageAdapter : RecyclerView.Adapter<MyViewHolder>() {
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val message = messagesList[position]
-        holder.message.visibility = View.VISIBLE
-        holder.time.visibility = View.VISIBLE
 
-        holder.message.text = message.message
+        holder.time.visibility = View.VISIBLE
         val dayOfMessage = formattedTime(message.time!!)
         holder.time.text = dayOfMessage
+
+        if (message.image.equals("true")){
+            holder.message.visibility = View.GONE
+            holder.mediaMessage.visibility = View.VISIBLE
+            Glide.with(context)
+                .load(message.message)
+                .placeholder(R.drawable.image_placeholder)
+                .into(holder.mediaMessage)
+        }else{
+            holder.message.visibility = View.VISIBLE
+            holder.message.text = message.message
+        }
+
+        holder.itemView.setOnClickListener {
+            listener?.getOnImageMessageClicked(position, message)
+        }
 
     }
 
@@ -83,9 +102,18 @@ class MessageAdapter : RecyclerView.Adapter<MyViewHolder>() {
         return dateTimeFormat.format(date)
     }
 
+    fun setOnImageMessageListener(listener: onImageMessageClicked) {
+        this.listener = listener
+    }
+
 }
 
 class MyViewHolder(row: View) : RecyclerView.ViewHolder(row) {
     val message: TextView = row.findViewById(R.id.tv_message_item)
     val time: TextView = row.findViewById(R.id.tv_msg_time)
+    val mediaMessage: ImageView =  row.findViewById(R.id.media_message)
+}
+
+interface onImageMessageClicked {
+    fun getOnImageMessageClicked(position: Int, messages: Message)
 }

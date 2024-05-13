@@ -1,5 +1,6 @@
 package com.example.graduationproject.chat
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.graduationproject.Utils
@@ -8,6 +9,8 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 
 class MessageRepo {
+
+    private val TAG = "MessageRepo"
 
     private val fireStore = FirebaseFirestore.getInstance()
 
@@ -31,14 +34,13 @@ class MessageRepo {
                 if (!snapshot!!.isEmpty) {
                     snapshot.documents.forEach { document ->
                         val messageModel = document.toObject(Message::class.java)
+                        Log.d(TAG, "getMessages: the message model returned => ${messageModel}")
 
-                        if (messageModel!!.sender.equals(Utils.getUidLoggedIn()) && messageModel.receiver.equals(
-                                friendId
-                            ) ||
-                            messageModel.sender.equals(friendId) && messageModel.receiver.equals(
-                                Utils.getUidLoggedIn()
-                            )
-                        ) {
+                        Log.d(TAG, "getMessages: the flag is ${messageModel?.image}")
+//                        Log.d(TAG, "getMessages: the flag is ${messageModel?.message}")
+
+                        if (messageModel!!.sender.equals(Utils.getUidLoggedIn()) && messageModel.receiver.equals(friendId) ||
+                            messageModel.sender.equals(friendId) && messageModel.receiver.equals(Utils.getUidLoggedIn())) {
                             messageModel.let {
                                 messagesList.add(it)
                             }

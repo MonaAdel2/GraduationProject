@@ -1,4 +1,4 @@
-package com.example.graduationproject.authentication.viewModel
+package com.example.graduationproject.authentication.login.viewModel
 
 import android.util.Log
 import androidx.fragment.app.FragmentActivity

@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/auth_nav_graph"
-    app:startDestination="@id/phoneFragment">
+    app:startDestination="@id/sendOTPCodeFragment">
     <fragment
         android:id="@+id/sendOTPCodeFragment"
-        android:name="com.example.graduationproject.authentication.view.SendOTPCodeFragment"
+        android:name="com.example.graduationproject.authentication.login.view.SendOTPCodeFragment"
         android:label="fragment_send_otp_code"
         tools:layout="@layout/fragment_send_otp_code" >
         <action
@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.graduationproject.authentication.view.LoginFragment"
+        android:name="com.example.graduationproject.authentication.login.view.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <argument

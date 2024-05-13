@@ -1,4 +1,4 @@
-package com.example.graduationproject.authentication.view
+package com.example.graduationproject.authentication.login.view
 
 import android.content.Intent
 import android.graphics.Color
@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.graduationproject.MainActivity
-import com.example.graduationproject.authentication.viewModel.AuthViewModel
+import com.example.graduationproject.authentication.login.viewModel.AuthViewModel
 import com.example.graduationproject.databinding.FragmentSendOtpCodeBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.hbb20.CountryCodePicker

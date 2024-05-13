@@ -79,5 +79,9 @@ dependencies {
     // image cropper
     api("com.theartofdev.edmodo:android-image-cropper:2.8.+")
     implementation("com.google.firebase:firebase-appcheck")
-
+    // retrofit
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
+    implementation ("com.google.code.gson:gson:2.10.1")
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
 }

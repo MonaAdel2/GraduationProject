@@ -5,17 +5,19 @@ import android.media.MediaPlayer
 import android.media.MediaRecorder
 import android.net.Uri
 import android.os.Bundle
-import android.os.Environment
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
+import androidx.lifecycle.ViewModelProvider
 import com.example.graduationproject.R
 import com.example.graduationproject.databinding.FragmentRecorderBinding
-import com.example.graduationproject.databinding.FragmentRegisterBinding
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.example.graduationproject.home.repo.RecorderRepoImp
+import com.example.graduationproject.home.viewmodel.RecorderViewModel
+import com.example.graduationproject.home.viewmodel.RecorderViewModelFactory
+import com.example.graduationproject.network.Client
 import com.google.firebase.Firebase
 import com.google.firebase.storage.storage
 import java.io.File
@@ -41,6 +43,7 @@ class RecorderFragment : Fragment() {
     private val recordPermissionCode = 111
     private val storage = Firebase.storage
     private val storageReference = storage.reference.child("audio")
+    lateinit var viewModel : RecorderViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,7 +55,7 @@ class RecorderFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        gettingViewModelReady()
         binding.btnStoprecording.isEnabled = false
         mediaRecorder = MediaRecorder()
         mediaPlayer = MediaPlayer()
@@ -81,6 +84,9 @@ class RecorderFragment : Fragment() {
                 return@setOnClickListener
             }
             uploadRecordingToFirebase()
+        }
+        viewModel.transcription.observe(requireActivity()){
+            binding.tvTranscription.text=it.toString()
         }
     }
 
@@ -142,8 +148,15 @@ class RecorderFragment : Fragment() {
 
         audioRef.putFile(file)
             .addOnSuccessListener {
-                // Upload success
-                Log.d("RecorderFragment", "Audio uploaded successfully")
+                audioRef.downloadUrl.addOnSuccessListener { uri ->
+                    val downloadUrl = uri
+                    Log.d("RecorderFragment", "Audio uploaded successfully. URL: $downloadUrl")
+                   viewModel.getTranscription(downloadUrl)
+                  //  Log.d("RecorderFragment", "Audio uploaded successfully. URL: $downloadUrl")
+                }.addOnFailureListener { e ->
+                    // Failed to retrieve download URL
+                    Log.e("RecorderFragment", "Error retrieving download URL: ${e.message}")
+                }
             }
             .addOnFailureListener { e ->
                 // Upload failed
@@ -160,5 +173,10 @@ class RecorderFragment : Fragment() {
         if (requestCode == recordPermissionCode && grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             binding.btnRecording.isEnabled = true
         }
+    }
+    private fun gettingViewModelReady() {
+        val recorderViewModelFactory =
+            RecorderViewModelFactory(RecorderRepoImp(Client))
+        viewModel = ViewModelProvider(this, recorderViewModelFactory).get(RecorderViewModel::class.java)
     }
 }

@@ -81,7 +81,7 @@
             app:layout_constraintTop_toTopOf="@+id/guideline" />
 
         <ImageView
-            android:id="@+id/imageView3"
+            android:id="@+id/btn_back_to_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -100,7 +100,7 @@
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/imageView3"
+            app:layout_constraintStart_toEndOf="@+id/btn_back_to_login"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView

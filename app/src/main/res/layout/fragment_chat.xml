@@ -43,7 +43,7 @@
             android:layout_marginEnd="16dp"
             android:text="@string/sender_name"
             android:textColor="@color/white"
-            android:textSize="@dimen/name_time_title"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -55,7 +55,7 @@
             android:layout_marginEnd="16dp"
             android:text="@string/receiver_name"
             android:textColor="@color/white"
-            android:textSize="@dimen/name_time_title"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="@+id/img_profile_receiver_chat"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_sender_name_chat" />

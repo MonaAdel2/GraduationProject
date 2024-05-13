@@ -58,5 +58,7 @@ class UsersAdapter(private val data: List<UserData?>,private val context: Contex
         holder.openChatButton.setOnClickListener {
             onItemClickListener.onItemClicked(UserData(data[position]!!.userName,data[position]!!.phoneNumber,data[position]!!.password,data[position]!!.imageUri,data[position]!!.userId))
         }
+        Glide.with(holder.itemView.context).load(data[position]!!.imageUri).into(holder.userPicture)
+
     }
 }

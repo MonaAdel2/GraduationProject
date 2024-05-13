@@ -1,5 +1,6 @@
 package com.example.graduationproject.home.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,8 @@ import java.util.Calendar
 import java.util.Locale
 
 class RecentChatsAdapter : RecyclerView.Adapter<RecentChatsViewHolder>() {
+
+    private val TAG = "RecentChatsAdapter"
 
     private var recentChatsList = listOf<RecentChat>()
     private var listener: onRecentChatClicked? = null
@@ -36,9 +39,18 @@ class RecentChatsAdapter : RecyclerView.Adapter<RecentChatsViewHolder>() {
         val firstName = fullName?.split(" ")?.get(0)
 
         holder.tvFriendName.text = recentChatsList.name
-        holder.tvMessage.text = "${firstName}:${recentChatsList.message!!}"
 
-        Glide.with(holder.itemView.context).load(recentChatsList.friendsImage)
+//        holder.tvMessage.text = "${firstName} : ${recentChatsList.message!!}"
+
+        if(recentChats.image.equals("true")){
+            holder.tvMessage.text = "${firstName} : photo"
+        }else{
+            holder.tvMessage.text = "${firstName} : ${recentChatsList.message!!}"
+
+        }
+
+        Log.d(TAG, "onBindViewHolder: the firend image link is ${recentChatsList.friendImage}")
+        Glide.with(holder.itemView.context).load(recentChatsList.friendImage)
             .placeholder(R.drawable.person_icon).into(holder.imgFriend)
 
         // time of the message

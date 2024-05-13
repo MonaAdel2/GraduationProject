@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.graduationproject.MainActivity
 import com.example.graduationproject.authentication.login.viewModel.AuthViewModel
@@ -43,11 +44,11 @@ class SendOTPCodeFragment : Fragment() {
         auth = FirebaseAuth.getInstance()
         authViewModel = ViewModelProvider(this)[AuthViewModel::class.java]
 
-        if (auth.currentUser != null) {
-            val intent = Intent(requireContext(), MainActivity::class.java)
-            requireActivity().startActivity(intent)
-            requireActivity().finish()
-        }
+//        if (auth.currentUser != null) {
+//            val intent = Intent(requireContext(), MainActivity::class.java)
+//            requireActivity().startActivity(intent)
+//            requireActivity().finish()
+//        }
         ccp = binding.countryCode
         ccp.registerCarrierNumberEditText(binding.phoneNumberEditText.editText)
 
@@ -78,6 +79,11 @@ class SendOTPCodeFragment : Fragment() {
                 Log.d(TAG, "onCreate: the verification id is null")
             }
 
+        }
+
+        binding.tvGoToSignup.setOnClickListener {
+            val action = SendOTPCodeFragmentDirections.actionSendOTPCodeFragmentToPhoneFragment()
+            view?.findNavController()?.navigate(action)
         }
 
     }

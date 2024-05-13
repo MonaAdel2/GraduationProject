@@ -4,15 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".authentication.login.view.SendOTPCodeFragment"
-    android:background="@color/background">
+    android:background="@color/background"
+    tools:context=".authentication.login.view.SendOTPCodeFragment">
 
 
     <ImageView
         android:id="@+id/img_verification_icon"
         android:layout_width="250dp"
         android:layout_height="250dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="160dp"
         android:src="@drawable/phone_number_icon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,8 +23,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="Enter your phone number"
         android:gravity="center"
+        android:text="Enter your phone number"
         android:textColor="@color/white"
         android:textSize="@dimen/headline2"
         app:layout_constraintEnd_toEndOf="parent"
@@ -36,30 +36,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
+        app:ccpDialog_searchEditTextTint="@color/white"
         app:ccpDialog_showNameCode="false"
         app:ccpDialog_showPhoneCode="true"
+        app:ccp_arrowColor="@color/white"
         app:ccp_autoDetectLanguage="true"
         app:ccp_clickable="true"
+        app:ccp_contentColor="@color/white"
         app:ccp_defaultNameCode="US"
         app:ccp_hintExampleNumber="true"
         app:ccp_showNameCode="false"
         app:ccp_showPhoneCode="true"
-        app:ccp_contentColor="@color/white"
-        app:ccp_arrowColor="@color/white"
-        app:ccpDialog_searchEditTextTint="@color/white"
         app:layout_constraintBottom_toBottomOf="@+id/phoneNumberEditText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/phoneNumberEditText" />
-
-<!--    <EditText-->
-<!--        android:id="@+id/phoneNumberEditText"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:hint="Enter Phone Number"-->
-<!--        android:inputType="phone"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toEndOf="@+id/countryCode"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
 
 
     <com.google.android.material.textfield.TextInputLayout
@@ -77,7 +67,7 @@
         app:boxCornerRadiusBottomStart="@dimen/editText_corner_radius"
         app:boxCornerRadiusTopEnd="@dimen/editText_corner_radius"
         app:boxCornerRadiusTopStart="@dimen/editText_corner_radius"
-        app:boxStrokeColor="@color/black"
+        app:boxStrokeColor="@color/transparent_white"
         app:boxStrokeWidth="0dp"
         app:endIconMode="clear_text"
         app:helperTextTextAppearance="@color/white"
@@ -90,10 +80,10 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
             android:textColorHint="@color/transparent_white"
             app:hintTextAppearance="@color/white"
-            app:hintTextColor="@color/white"
-            android:textColor="@color/white"/>
+            app:hintTextColor="@color/white" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
@@ -104,9 +94,41 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
-        android:text="@string/login_frg_send_verification_code_button"
         android:backgroundTint="@color/blue_icon_bg"
+        android:text="@string/login_frg_send_verification_code_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/countryCode"
         app:layout_constraintTop_toBottomOf="@+id/phoneNumberEditText" />
+
+    <TextView
+        android:id="@+id/tv_dont_have_acc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Don't have an account?"
+        android:textColor="@color/white"
+        android:textSize="@dimen/message"
+        app:layout_constraintEnd_toEndOf="@+id/sendOtpButton"
+        app:layout_constraintEnd_toStartOf="@+id/tv_go_to_signup"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sendOtpButton" />
+
+    <TextView
+        android:id="@+id/tv_go_to_signup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:text="Signup"
+        android:textColor="@color/white"
+        android:textSize="@dimen/message"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tv_dont_have_acc"
+        app:layout_constraintTop_toBottomOf="@+id/sendOtpButton" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

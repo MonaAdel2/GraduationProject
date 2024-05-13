@@ -1,5 +1,6 @@
 package com.example.graduationproject.home.repo
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.graduationproject.Utils
@@ -35,6 +36,7 @@ class RecentChatsListRepo {
 //
 //                                }
 //                            }
+                        Log.d(TAG, "getAllChatsList:image url of friend is ${recentChat.friendImage} ")
                         chatList.add(recentChat)
                     }
                 }

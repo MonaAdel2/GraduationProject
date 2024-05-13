@@ -6,9 +6,9 @@
     <dimen name="headline2">20sp</dimen>
 
 <!--    for recent chats   -->
-    <dimen name="name_time_title">15sp</dimen>
-    <dimen name="message">13sp</dimen>
-    <dimen name="time">12sp</dimen>
+    <dimen name="name_time_title">20sp</dimen>
+    <dimen name="message">15sp</dimen>
+    <dimen name="time">15sp</dimen>
 
 
 <!--    favorites-->

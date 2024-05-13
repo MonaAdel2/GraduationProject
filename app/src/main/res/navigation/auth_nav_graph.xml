@@ -12,6 +12,9 @@
         <action
             android:id="@+id/action_sendOTPCodeFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_sendOTPCodeFragment_to_phoneFragment"
+            app:destination="@id/phoneFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -34,6 +37,9 @@
         <action
             android:id="@+id/action_phoneFragment_to_OTPFragment2"
             app:destination="@id/OTPFragment" />
+        <action
+            android:id="@+id/action_phoneFragment_to_sendOTPCodeFragment2"
+            app:destination="@id/sendOTPCodeFragment" />
     </fragment>
     <fragment
         android:id="@+id/OTPFragment"

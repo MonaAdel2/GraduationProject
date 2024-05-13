@@ -7,7 +7,7 @@ data class RecentChat(
     val friendId: String? = "",
     val name: String? = "",
     val time: String? = "",
-    val friendsImage: String? = "",
+    val friendImage: String? = "",
     val sender: String? = "",
     val message: String? = "",
     val person: String? = "",
@@ -28,7 +28,7 @@ data class RecentChat(
         parcel.writeString(friendId)
         parcel.writeString(name)
         parcel.writeString(time)
-        parcel.writeString(friendsImage)
+        parcel.writeString(friendImage)
         parcel.writeString(sender)
         parcel.writeString(message)
         parcel.writeString(person)

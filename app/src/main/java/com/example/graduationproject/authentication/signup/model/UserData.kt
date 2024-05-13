@@ -4,6 +4,7 @@ import android.os.Parcel
 import android.os.Parcelable
 
 data class UserData(val userName:String, val phoneNumber:String, val password:String, val imageUri:String, val userId:String):Parcelable{
+    constructor() : this("", "", "", "", "")
     constructor(parcel: Parcel) : this(
         parcel.readString().toString(),
         parcel.readString().toString(),

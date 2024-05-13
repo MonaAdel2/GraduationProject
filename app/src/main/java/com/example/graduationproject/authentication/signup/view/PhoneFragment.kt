@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.graduationproject.R
 import com.example.graduationproject.authentication.signup.model.PhoneData
@@ -78,6 +79,10 @@ class PhoneFragment : Fragment() {
               phoneNumber= "+" +binding.counteryCodePicker.selectedCountryCode.toString()+ binding.etPhoneNumber.editText?.text?.toString()
                 phoneFragmentViewModel.checkPhoneExistsOrNot(phoneNumber)
             }
+        }
+        binding.btnBackToLogin.setOnClickListener{
+            val action = PhoneFragmentDirections.actionPhoneFragmentToSendOTPCodeFragment()
+            view?.findNavController()?.navigate(action)
         }
     }
 }

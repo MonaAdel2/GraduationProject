@@ -1,4 +1,4 @@
-package com.example.graduationproject.profile
+package com.example.graduationproject.profile.view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

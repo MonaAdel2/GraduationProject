@@ -12,8 +12,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.graduationproject.R
+import com.example.graduationproject.authentication.signup.model.UserData
 import com.example.graduationproject.databinding.FragmentRecorderBinding
+import com.example.graduationproject.home.adapter.UsersAdapter
 import com.example.graduationproject.home.repo.RecorderRepoImp
 import com.example.graduationproject.home.viewmodel.RecorderViewModel
 import com.example.graduationproject.home.viewmodel.RecorderViewModelFactory
@@ -87,6 +92,22 @@ class RecorderFragment : Fragment() {
         }
         viewModel.transcription.observe(requireActivity()){
             binding.tvTranscription.text=it.toString()
+            Log.d("RecorderViewModel", "searchDocumentsByName: ")
+
+            viewModel.searchDocumentsByName("رودينا مؤمن")
+        }
+        viewModel.searchedName.observe(requireActivity()){ it->
+
+            val adapter= UsersAdapter(listOf(it),requireContext())
+            binding.rvRecorderSearch.adapter= adapter
+            binding.rvRecorderSearch.layoutManager = LinearLayoutManager(requireContext(),  RecyclerView.VERTICAL, false)
+            adapter.setOnClickListener(object : UsersAdapter.OnItemClickListener {
+                override fun onItemClicked(userData: UserData) {
+//                    val  action = UsersFragmentDirections.actionUsersFragmentToChatFragment2(user?.uid.toString(),userData)
+                    val  action = UsersFragmentDirections.actionUsersFragmentToChatFragment2(userData)
+                    findNavController().navigate(action)
+                }
+            })
         }
     }
 

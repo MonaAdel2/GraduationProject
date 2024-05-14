@@ -4,17 +4,17 @@
     <item
         android:id="@+id/action_view_profile"
         android:title="View Profile"
-        android:icon="@drawable/settings_icon"/>
+        />
 
     <item
         android:id="@+id/action_about_us"
         android:title="About us"
-        android:icon="@drawable/settings_icon"/>
+        />
 
     <item
         android:id="@+id/action_logout"
         android:title="Logout"
-        android:icon="@drawable/logout_icon"/>
+        />
 
 
 </menu>

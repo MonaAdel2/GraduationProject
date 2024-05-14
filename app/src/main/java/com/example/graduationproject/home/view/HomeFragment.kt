@@ -168,7 +168,7 @@ class HomeFragment : Fragment(), onRecentChatClicked {
     }
 
     private fun goToAboutUs(){
-//        val action = HomeFragmentDirections.
-//        view?.findNavController()?.navigate(action)
+        val action = HomeFragmentDirections.actionHomeFragmentToAboutUsFragment()
+        view?.findNavController()?.navigate(action)
     }
 }

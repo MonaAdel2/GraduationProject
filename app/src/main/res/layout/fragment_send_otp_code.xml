@@ -7,29 +7,53 @@
     android:background="@color/background"
     tools:context=".authentication.login.view.SendOTPCodeFragment">
 
-
-    <ImageView
-        android:id="@+id/img_verification_icon"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
-        android:layout_marginTop="160dp"
-        android:src="@drawable/phone_number_icon"
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
+        android:text="Hello Again"
+        android:textColor="@color/white"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Welcome back to App Name!"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+<!--    <ImageView-->
+<!--        android:id="@+id/img_verification_icon"-->
+<!--        android:layout_width="250dp"-->
+<!--        android:layout_height="250dp"-->
+<!--        android:layout_marginTop="32dp"-->
+<!--        android:src="@drawable/phone_number_icon"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/textView8" />-->
 
     <TextView
         android:id="@+id/tv_verification_welcome_msg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="50dp"
         android:gravity="center"
-        android:text="Enter your phone number"
+        android:text="Please enter your phone number"
         android:textColor="@color/white"
-        android:textSize="@dimen/headline2"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/img_verification_icon" />
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
     <com.hbb20.CountryCodePicker
         android:id="@+id/countryCode"
@@ -43,7 +67,7 @@
         app:ccp_autoDetectLanguage="true"
         app:ccp_clickable="true"
         app:ccp_contentColor="@color/white"
-        app:ccp_defaultNameCode="US"
+        app:ccp_defaultNameCode="Eg"
         app:ccp_hintExampleNumber="true"
         app:ccp_showNameCode="false"
         app:ccp_showPhoneCode="true"
@@ -83,7 +107,8 @@
             android:textColor="@color/white"
             android:textColorHint="@color/transparent_white"
             app:hintTextAppearance="@color/white"
-            app:hintTextColor="@color/white" />
+            app:hintTextColor="@color/white"
+            android:inputType="number"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button

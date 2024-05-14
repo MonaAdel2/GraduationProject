@@ -4,13 +4,17 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.graduationproject.R
 import com.example.graduationproject.authentication.signup.model.UserData
 import com.example.graduationproject.databinding.FragmentHomeBinding
 import com.example.graduationproject.home.adapter.RecentChatsAdapter
@@ -19,7 +23,6 @@ import com.example.graduationproject.home.model.RecentChat
 import com.example.graduationproject.home.viewmodel.RecentChatsViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.toObject
 
 
 class HomeFragment : Fragment(), onRecentChatClicked {
@@ -69,6 +72,10 @@ class HomeFragment : Fragment(), onRecentChatClicked {
             findNavController().navigate(action)
         }
 
+        binding.dotsMenuHome.setOnClickListener{
+            showPopupMenu(it)
+        }
+
 
     }
 
@@ -106,5 +113,31 @@ class HomeFragment : Fragment(), onRecentChatClicked {
 
 
 
+
+    }
+
+    private fun showPopupMenu(view: android.view.View) {
+        val popupMenu = PopupMenu(requireContext(), view)
+        popupMenu.menuInflater.inflate(R.menu.popup_menu, popupMenu.menu)
+
+        popupMenu.setOnMenuItemClickListener { menuItem: MenuItem ->
+            when (menuItem.itemId) {
+                R.id.action_view_profile -> {
+                    Toast.makeText(requireContext(), "view profile", Toast.LENGTH_SHORT).show()
+                    true
+                }
+                R.id.action_setting -> {
+                    Toast.makeText(requireContext(), "setting ", Toast.LENGTH_SHORT).show()
+                    true
+                }
+                R.id.action_logout -> {
+                    Toast.makeText(requireContext(), "logout ", Toast.LENGTH_SHORT).show()
+                    true
+                }
+                else -> false
+            }
+        }
+
+        popupMenu.show()
     }
 }

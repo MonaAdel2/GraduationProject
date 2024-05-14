@@ -62,7 +62,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_register" />
 
-
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/et_user_name"
             android:layout_width="match_parent"
@@ -74,14 +73,16 @@
             app:counterTextColor="@color/blue_icon_bg"
             app:cursorColor="@color/blue_icon_bg"
             app:helperTextTextColor="@color/blue_icon_bg"
-            app:hintTextColor="@color/blue_icon_bg"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/iv_user_picture"
             app:placeholderTextColor="@color/blue_icon_bg"
             app:prefixTextColor="@color/blue_icon_bg"
             app:startIconDrawable="@drawable/ic_username"
-            app:suffixTextColor="@color/blue_icon_bg">
+            app:suffixTextColor="@color/blue_icon_bg"
+            app:helperTextTextAppearance="@color/white"
+            app:hintTextAppearance="@color/white"
+            app:hintTextColor="@color/white">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -90,7 +91,8 @@
                 android:fontFamily="@font/roboto"
                 android:hint="@string/user_name"
                 android:textColorHint="@color/white"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:textColor="@color/white"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -123,7 +125,9 @@
                 android:fontFamily="@font/roboto"
                 android:hint="@string/password"
                 android:textColorHint="@color/white"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:textColor="@color/white"
+                />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -156,7 +160,8 @@
                 android:fontFamily="@font/roboto"
                 android:hint="@string/renter_password"
                 android:textColorHint="@color/white"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:textColor="@color/white"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button

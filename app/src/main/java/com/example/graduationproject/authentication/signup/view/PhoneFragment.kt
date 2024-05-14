@@ -52,7 +52,7 @@ class PhoneFragment : Fragment() {
         phoneFragmentViewModel.phoneExists.observe(requireActivity()){ phoneExists->
             Toast.makeText(requireContext(), "$phoneExists", Toast.LENGTH_SHORT).show()
             if(phoneExists==true){
-                Toast.makeText(requireContext(), "you Already Have AN account", Toast.LENGTH_SHORT).show()
+//                Toast.makeText(requireContext(), "you Already Have AN account", Toast.LENGTH_SHORT).show()
                 val action= PhoneFragmentDirections.actionPhoneFragmentToSendOTPCodeFragment()
                 findNavController().navigate(action)
             }else{
@@ -80,7 +80,7 @@ class PhoneFragment : Fragment() {
                 phoneFragmentViewModel.checkPhoneExistsOrNot(phoneNumber)
             }
         }
-        binding.btnBackToLogin.setOnClickListener{
+        binding.tvGoToLogin.setOnClickListener{
             val action = PhoneFragmentDirections.actionPhoneFragmentToSendOTPCodeFragment()
             view?.findNavController()?.navigate(action)
         }

@@ -8,12 +8,25 @@
     android:background="@color/background">
 
 
-    <ImageView
-        android:id="@+id/img_verification_icon"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
-        android:layout_marginTop="80dp"
-        android:src="@drawable/verification_code_icon"
+<!--    <ImageView-->
+<!--        android:id="@+id/img_verification_icon"-->
+<!--        android:layout_width="250dp"-->
+<!--        android:layout_height="250dp"-->
+<!--        android:layout_marginTop="80dp"-->
+<!--        android:src="@drawable/verification_code_icon"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
+        android:fontFamily="@font/roboto"
+        android:text="Verification Code"
+        android:textColor="@color/white"
+        android:textSize="@dimen/headline1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -22,8 +35,8 @@
         android:id="@+id/tv_verification_welcome_msg"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
         android:layout_marginHorizontal="@dimen/main_margin_horizontal"
+        android:layout_marginTop="32dp"
         android:gravity="center"
         android:maxLines="2"
         android:text="Enter the verification code sent to your phone number"
@@ -31,7 +44,7 @@
         android:textSize="@dimen/headline2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/img_verification_icon" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
 
     <Button
@@ -150,7 +163,7 @@
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintGuide_begin="400dp"
+        app:layout_constraintGuide_begin="370dp"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -162,7 +175,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintGuide_begin="550dp"
+        app:layout_constraintGuide_begin="500dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.5" />
 

@@ -11,6 +11,7 @@
         android:id="@+id/cardView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
         android:background="@color/background"
         android:backgroundTint="@color/background"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -28,9 +29,10 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/iv_user_picture_in_rv"
-                android:layout_width="93dp"
-                android:layout_height="122dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
                 android:src="@drawable/ic_profile"
                 app:civ_border_color="#FF000000"
                 app:civ_border_width="0dp"
@@ -41,31 +43,36 @@
                 android:id="@+id/tv_username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/roboto"
                 android:text="Rodina mo'men"
                 android:textColor="@color/white"
-                android:textSize="24sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.839"
+                android:textSize="@dimen/headline2"
                 app:layout_constraintStart_toEndOf="@+id/iv_user_picture_in_rv"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
+            <ImageView
                 android:id="@+id/btn_adding_chat"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="10dp"
-                android:clickable="true"
-                app:backgroundTint="@color/floating_button"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginEnd="32dp"
+                android:src="@drawable/plus_ic"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_username"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_username"
-                app:shapeAppearance="@null"
-                app:srcCompat="@drawable/plus_ic"
-                app:tint="@null" />
+                app:layout_constraintTop_toTopOf="@+id/tv_username" />
+            <!--            <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+            <!--                android:id="@+id/btn_adding_chat"-->
+            <!--                android:layout_width="40dp"-->
+            <!--                android:layout_height="40dp"-->
+            <!--                android:layout_marginStart="100dp"-->
+            <!--                android:clickable="true"-->
+            <!--                app:backgroundTint="@color/floating_button"-->
+            <!--                app:layout_constraintStart_toEndOf="@+id/tv_username"-->
+            <!--                app:layout_constraintTop_toTopOf="@+id/iv_user_picture_in_rv"-->
+            <!--                app:shapeAppearance="@null"-->
+            <!--                app:srcCompat="@drawable/plus_ic"-->
+            <!--                app:tint="@null" />-->
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

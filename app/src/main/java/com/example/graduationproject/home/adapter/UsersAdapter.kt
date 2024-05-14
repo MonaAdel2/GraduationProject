@@ -27,7 +27,7 @@ class UsersAdapter(private val data: List<UserData?>,private val context: Contex
     class myHolder(row: View, onItemClickListener: OnItemClickListener): ViewHolder(row){
         var userName= row.findViewById<TextView>(R.id.tv_username)
         var userPicture=row.findViewById<ImageView>(R.id.iv_user_picture_in_rv)
-        var openChatButton= row.findViewById<FloatingActionButton>(R.id.btn_adding_chat)
+        var openChatButton= row.findViewById<ImageView>(R.id.btn_adding_chat)
 
     }
 

@@ -1,5 +1,6 @@
 package com.example.graduationproject.home.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -15,6 +16,8 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.graduationproject.R
+import com.example.graduationproject.Utils
+import com.example.graduationproject.authentication.AuthActivity
 import com.example.graduationproject.authentication.signup.model.UserData
 import com.example.graduationproject.databinding.FragmentHomeBinding
 import com.example.graduationproject.home.adapter.RecentChatsAdapter
@@ -22,6 +25,7 @@ import com.example.graduationproject.home.adapter.onRecentChatClicked
 import com.example.graduationproject.home.model.RecentChat
 import com.example.graduationproject.home.viewmodel.RecentChatsViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 
@@ -34,6 +38,7 @@ class HomeFragment : Fragment(), onRecentChatClicked {
     private lateinit var recentChatViewModel: RecentChatsViewModel
     private lateinit var recentChatsAdapter: RecentChatsAdapter
     private lateinit var firestore: FirebaseFirestore
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,6 +54,7 @@ class HomeFragment : Fragment(), onRecentChatClicked {
         recentChatViewModel = ViewModelProvider(this).get(RecentChatsViewModel::class.java)
 
         firestore = FirebaseFirestore.getInstance()
+        auth = FirebaseAuth.getInstance()
 
         recentChatsAdapter = RecentChatsAdapter()
 
@@ -124,14 +130,17 @@ class HomeFragment : Fragment(), onRecentChatClicked {
             when (menuItem.itemId) {
                 R.id.action_view_profile -> {
                     Toast.makeText(requireContext(), "view profile", Toast.LENGTH_SHORT).show()
+                    goToProfile()
                     true
                 }
-                R.id.action_setting -> {
-                    Toast.makeText(requireContext(), "setting ", Toast.LENGTH_SHORT).show()
+                R.id.action_about_us -> {
+                    Toast.makeText(requireContext(), "about us", Toast.LENGTH_SHORT).show()
+                    goToAboutUs()
                     true
                 }
                 R.id.action_logout -> {
                     Toast.makeText(requireContext(), "logout ", Toast.LENGTH_SHORT).show()
+                    logout()
                     true
                 }
                 else -> false
@@ -139,5 +148,27 @@ class HomeFragment : Fragment(), onRecentChatClicked {
         }
 
         popupMenu.show()
+    }
+
+    private fun logout() {
+        auth.signOut()
+        requireActivity().startActivity(Intent(requireContext(), AuthActivity::class.java))
+        requireActivity().finish()
+    }
+
+    private fun goToProfile(){
+        firestore.collection("Users").document(Utils.getUidLoggedIn()).get().addOnSuccessListener {
+            if(it.exists()){
+                val userData = it.toObject(UserData::class.java)
+                val action = HomeFragmentDirections.actionHomeFragmentToProfileFragment(userData!!)
+                view?.findNavController()?.navigate(action)
+            }
+        }
+
+    }
+
+    private fun goToAboutUs(){
+//        val action = HomeFragmentDirections.
+//        view?.findNavController()?.navigate(action)
     }
 }

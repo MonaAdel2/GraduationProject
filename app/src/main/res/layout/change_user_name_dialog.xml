@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <androidx.cardview.widget.CardView
         android:layout_width="350dp"
-        android:layout_height="250dp"
+        android:layout_height="300dp"
         app:cardBackgroundColor="@color/background"
         app:cardCornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -19,7 +19,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/matteBlack"
+            android:background="@color/background"
             android:elevation="20dp">
 
             <ImageView
@@ -82,12 +82,11 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_keep"
+                android:id="@+id/btn_save"
                 android:layout_width="115dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="32dp"
                 android:layout_marginEnd="40dp"
-                android:background="@drawable/discard_button"
                 android:backgroundTint="@color/blue_icon_bg"
                 android:fontFamily="@font/roboto"
                 android:text="@string/save"
@@ -103,7 +102,7 @@
                 android:layout_width="115dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="60dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="32dp"
                 android:background="@drawable/discard_button"
                 android:backgroundTint="#AF0000"
                 android:fontFamily="@font/roboto"

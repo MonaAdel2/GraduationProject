@@ -75,7 +75,7 @@
         tools:layout="@layout/fragment_recorder" />
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.graduationproject.profile.ProfileFragment"
+        android:name="com.example.graduationproject.profile.view.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" >
         <argument

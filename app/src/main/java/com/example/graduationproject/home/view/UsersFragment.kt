@@ -6,6 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
+import android.widget.SearchView.OnQueryTextListener
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -25,6 +28,7 @@ import com.google.firebase.firestore.firestore
 class UsersFragment : Fragment() {
     private lateinit var binding: FragmentUsersBinding
     private lateinit var usersRV: RecyclerView
+
     private lateinit var userFragmentViewModel: UserFragmentViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,24 +42,34 @@ class UsersFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
        val db= FirebaseAuth.getInstance()
+
         val user = db.currentUser
         userFragmentViewModel=UserFragmentViewModel()
         userFragmentViewModel.getUsers()
         usersRV= binding.rvUsers
-
-
+       var  userSv =binding.svUsers
         userFragmentViewModel.userList.observe(requireActivity()){
             val adapter=UsersAdapter(it,requireContext())
             usersRV.adapter= adapter
             usersRV.layoutManager = LinearLayoutManager(requireContext(),  RecyclerView.VERTICAL, false)
             adapter.setOnClickListener(object : UsersAdapter.OnItemClickListener {
                 override fun onItemClicked(userData: UserData) {
-//                    val  action = UsersFragmentDirections.actionUsersFragmentToChatFragment2(user?.uid.toString(),userData)
                     val  action = UsersFragmentDirections.actionUsersFragmentToChatFragment2(userData)
                     findNavController().navigate(action)
                 }
             })
         }
+        userSv.setOnQueryTextListener(object :
+            androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                userFragmentViewModel.searchUsersByUserNamePrefix(query)
+                return true
+            }
 
+            override fun onQueryTextChange(newText: String): Boolean {
+                userFragmentViewModel.searchUsersByUserNamePrefix(newText)
+                return true
+            }
+        })
     }
 }

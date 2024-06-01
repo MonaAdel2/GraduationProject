@@ -36,6 +36,7 @@ class PhoneFragment : Fragment() {
     private lateinit var binding: FragmentPhoneBinding
     private lateinit var phoneNumber:String
     private lateinit var auth: FirebaseAuth
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

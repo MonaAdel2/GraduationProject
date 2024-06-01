@@ -25,4 +25,10 @@
     <string name="verification_code">Verification Code</string>
     <string name="we_have_sent_the_verification_code">We have sent the verification code</string>
     <string name="verify">Verify</string>
+
+    <string name="change_account_name">Change account name</string>
+    <string name="change_account_password">Change account password</string>
+    <string name="change_account_image">Change account profile picture</string>
+    <string name="discard">discard</string>
+    <string name="save">save</string>
 </resources>

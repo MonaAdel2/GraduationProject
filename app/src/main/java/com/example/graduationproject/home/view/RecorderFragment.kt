@@ -94,7 +94,7 @@ class RecorderFragment : Fragment() {
             binding.tvTranscription.text=it.toString()
             Log.d("RecorderViewModel", "searchDocumentsByName: ")
 
-            viewModel.searchDocumentsByName("رودينا مؤمن")
+            viewModel.searchDocumentsByName("رودينا")
         }
         viewModel.searchedName.observe(requireActivity()){ it->
 

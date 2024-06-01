@@ -40,6 +40,12 @@
         <action
             android:id="@+id/action_HomeFragment_to_chatFragment"
             app:destination="@id/chatFragment" />
+        <action
+            android:id="@+id/action_HomeFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_HomeFragment_to_aboutUsFragment"
+            app:destination="@id/aboutUsFragment" />
     </fragment>
     <fragment
         android:id="@+id/usersFragment"
@@ -67,4 +73,18 @@
         android:name="com.example.graduationproject.home.view.RecorderFragment"
         android:label="fragment_recorder"
         tools:layout="@layout/fragment_recorder" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.graduationproject.profile.view.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <argument
+            android:name="userData"
+            app:argType="com.example.graduationproject.authentication.signup.model.UserData" />
+    </fragment>
+    <fragment
+        android:id="@+id/aboutUsFragment"
+        android:name="com.example.graduationproject.aboutUs.view.AboutUsFragment"
+        android:label="fragment_about_us"
+        tools:layout="@layout/fragment_about_us" />
 </navigation>

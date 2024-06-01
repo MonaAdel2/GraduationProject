@@ -45,6 +45,7 @@ class RecorderViewModel(val recorderRepo: RecorderRepo): ViewModel()  {
                 }
                 .addOnFailureListener { exception ->
                     Log.e("RecorderViewModel", "Error searching documents", exception)
+
                 }
         }
     }

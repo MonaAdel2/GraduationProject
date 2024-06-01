@@ -94,11 +94,10 @@ class RecorderFragment : Fragment() {
             binding.tvTranscription.text=it.toString()
             Log.d("RecorderViewModel", "searchDocumentsByName: ")
 
-            viewModel.searchDocumentsByName("رودينا")
+            viewModel.searchUsersByUserNamePrefix("رودينا")
         }
-        viewModel.searchedName.observe(requireActivity()){ it->
-
-            val adapter= UsersAdapter(listOf(it),requireContext())
+        viewModel.userList.observe(requireActivity()){ it->
+            val adapter= UsersAdapter(it,requireContext())
             binding.rvRecorderSearch.adapter= adapter
             binding.rvRecorderSearch.layoutManager = LinearLayoutManager(requireContext(),  RecyclerView.VERTICAL, false)
             adapter.setOnClickListener(object : UsersAdapter.OnItemClickListener {
@@ -172,7 +171,8 @@ class RecorderFragment : Fragment() {
                 audioRef.downloadUrl.addOnSuccessListener { uri ->
                     val downloadUrl = uri
                     Log.d("RecorderFragment", "Audio uploaded successfully. URL: $downloadUrl")
-                   viewModel.getTranscription(downloadUrl)
+                    viewModel.searchUsersByUserNamePrefix("رودينا")
+              //     viewModel.getTranscription(downloadUrl)
                   //  Log.d("RecorderFragment", "Audio uploaded successfully. URL: $downloadUrl")
                 }.addOnFailureListener { e ->
                     // Failed to retrieve download URL

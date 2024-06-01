@@ -1,5 +1,6 @@
 package com.example.graduationproject.home.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -31,6 +32,25 @@ class UserFragmentViewModel(): ViewModel() {
                         }
                         _usersList.value=users
                     }
+                }
+        }
+    }
+
+    fun searchUsersByUserNamePrefix(prefix: String) {
+        viewModelScope.launch {
+            db.collection("Users")
+                .orderBy("userName")
+                .startAt(prefix)
+                .endAt(prefix + "\uf8ff")
+                .get()
+                .addOnSuccessListener { querySnapshot ->
+                    val users = querySnapshot.documents.mapNotNull { document ->
+                        document.toObject(UserData::class.java)
+                    }
+                    _usersList.value = users
+                }
+                .addOnFailureListener { exception ->
+                    Log.w("UserFragmentViewModel", "Error getting documents: ", exception)
                 }
         }
     }

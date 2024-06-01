@@ -16,8 +16,8 @@ import java.net.URI
 class RecorderViewModel(val recorderRepo: RecorderRepo): ViewModel()  {
     private val _transcription = MutableLiveData<String>()
     val transcription: LiveData<String> = _transcription
-    private val _searchedName = MutableLiveData<UserData>()
-    val searchedName: LiveData<UserData> = _searchedName
+    private val _usersList = MutableLiveData<List<UserData?>>()
+    val userList: LiveData<List<UserData?>> = _usersList
 
     private val db = FirebaseFirestore.getInstance()
     fun getTranscription(url: Uri?) {
@@ -27,25 +27,21 @@ class RecorderViewModel(val recorderRepo: RecorderRepo): ViewModel()  {
                 _transcription.value=response.transcription
             }
     }
-    fun searchDocumentsByName(name: String) {
+    fun searchUsersByUserNamePrefix(prefix: String) {
         viewModelScope.launch {
-            Log.d("RecorderViewModel", "searchDocumentsByName: ")
             db.collection("Users")
-                .whereEqualTo("userName", name)
+                .orderBy("userName")
+                .startAt(prefix)
+                .endAt(prefix + "\uf8ff")
                 .get()
-                .addOnSuccessListener { documents ->
-                    for (document in documents) {
-                        Log.d("RecorderViewModel", "Document found: ${document.id}")
-                        val data = document.data
-                      //  UserData( data["userName"] as String, data["phoneNumber"] as String, data["password"] as String, data["imageUri"] as String, data["userId"] as String)
-                        _searchedName.value =  UserData( data["userName"] as String, data["phoneNumber"] as String, data["password"] as String, data["imageUri"] as String, data["userId"] as String)
-
-                        Log.d("RecorderViewModel", "Document data: $data")
+                .addOnSuccessListener { querySnapshot ->
+                    val users = querySnapshot.documents.mapNotNull { document ->
+                        document.toObject(UserData::class.java)
                     }
+                    _usersList.value = users
                 }
                 .addOnFailureListener { exception ->
-                    Log.e("RecorderViewModel", "Error searching documents", exception)
-
+                    Log.w("UserFragmentViewModel", "Error getting documents: ", exception)
                 }
         }
     }

@@ -1,0 +1,37 @@
+[33m743d879[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m HEAD@{0}: checkout: moving from chatting_fragmanet to master
+[33m85f110c[m[33m ([m[1;31morigin/chatting_fragmanet[m[33m, [m[1;32mchatting_fragmanet[m[33m)[m HEAD@{1}: checkout: moving from master to chatting_fragmanet
+[33m743d879[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m HEAD@{2}: checkout: moving from chatting_fragmanet to master
+[33m85f110c[m[33m ([m[1;31morigin/chatting_fragmanet[m[33m, [m[1;32mchatting_fragmanet[m[33m)[m HEAD@{3}: checkout: moving from master to chatting_fragmanet
+[33m743d879[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m HEAD@{4}: merge origin/master: Fast-forward
+[33m46ec5da[m HEAD@{5}: checkout: moving from chatting_fragmanet to master
+[33m85f110c[m[33m ([m[1;31morigin/chatting_fragmanet[m[33m, [m[1;32mchatting_fragmanet[m[33m)[m HEAD@{6}: checkout: moving from master to chatting_fragmanet
+[33m46ec5da[m HEAD@{7}: checkout: moving from chatting_fragmanet to master
+[33m85f110c[m[33m ([m[1;31morigin/chatting_fragmanet[m[33m, [m[1;32mchatting_fragmanet[m[33m)[m HEAD@{8}: checkout: moving from master to chatting_fragmanet
+[33m7e6e008[m HEAD@{9}: checkout: moving from chatting_fragmanet to master
+[33m85f110c[m[33m ([m[1;31morigin/chatting_fragmanet[m[33m, [m[1;32mchatting_fragmanet[m[33m)[m HEAD@{10}: commit: add view model of the chat fragment and add the logic of accessing it from fragment.
+[33m7e6e008[m HEAD@{11}: checkout: moving from master to chatting_fragmanet
+[33m7e6e008[m HEAD@{12}: merge origin/master: Fast-forward
+[33mb2ec460[m HEAD@{13}: merge origin/master: Fast-forward
+[33mec93b7a[m HEAD@{14}: checkout: moving from pin_lib to master
+[33m81168c9[m[33m ([m[1;31morigin/pin_lib[m[33m, [m[1;32mpin_lib[m[33m)[m HEAD@{15}: commit: Remove pin lib
+[33mec93b7a[m HEAD@{16}: checkout: moving from master to pin_lib
+[33mec93b7a[m HEAD@{17}: merge origin/master: Merge made by the 'ort' strategy.
+[33m1667c1e[m HEAD@{18}: commit (merge): Merge branch 'Login_ui'
+[33m09796b8[m HEAD@{19}: checkout: moving from Login_ui to master
+[33mef7b47e[m[33m ([m[1;31morigin/Login_ui[m[33m, [m[1;32mLogin_ui[m[33m)[m HEAD@{20}: checkout: moving from master to Login_ui
+[33m09796b8[m HEAD@{21}: checkout: moving from Chat_fragment to master
+[33m6c8a5fb[m[33m ([m[1;31morigin/Chat_fragment[m[33m, [m[1;32mChat_fragment[m[33m)[m HEAD@{22}: commit: Design of chat fragment.
+[33m09796b8[m HEAD@{23}: checkout: moving from master to Chat_fragment
+[33m09796b8[m HEAD@{24}: merge origin/master: Fast-forward
+[33m4b2de78[m HEAD@{25}: checkout: moving from Login_ui to master
+[33mef7b47e[m[33m ([m[1;31morigin/Login_ui[m[33m, [m[1;32mLogin_ui[m[33m)[m HEAD@{26}: commit: create login UI.
+[33m00bab44[m[33m ([m[1;31morigin/basic_values[m[33m, [m[1;32mbasic_values[m[33m)[m HEAD@{27}: checkout: moving from basic_values to Login_ui
+[33m00bab44[m[33m ([m[1;31morigin/basic_values[m[33m, [m[1;32mbasic_values[m[33m)[m HEAD@{28}: commit: Adding the main app colors and dimensions values.
+[33m33418a3[m[33m ([m[1;31morigin/feature_login[m[33m, [m[1;32mfeature_login[m[33m)[m HEAD@{29}: checkout: moving from feature_login to basic_values
+[33m33418a3[m[33m ([m[1;31morigin/feature_login[m[33m, [m[1;32mfeature_login[m[33m)[m HEAD@{30}: commit: Remove Factory
+[33m89e27f3[m HEAD@{31}: commit: Establish the login structure including sending and verifying the OTP.
+[33m7e86cf8[m[33m ([m[1;31morigin/Authentication_structure[m[33m, [m[1;32mAuthentication_structure[m[33m)[m HEAD@{32}: checkout: moving from Authentication_structure to feature_login
+[33m7e86cf8[m[33m ([m[1;31morigin/Authentication_structure[m[33m, [m[1;32mAuthentication_structure[m[33m)[m HEAD@{33}: commit: Create auth activity, login and sign up fragments, navigation graph, and view model.
+[33m4b2de78[m HEAD@{34}: checkout: moving from master to Authentication_structure
+[33m4b2de78[m HEAD@{35}: commit: Adding the initial dependencies and connect the project to Firebase.
+[33mfa32fec[m HEAD@{36}: commit (initial): Initial commit

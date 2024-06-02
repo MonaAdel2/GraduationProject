@@ -19,7 +19,10 @@
         <action
             android:id="@+id/action_chatFragment_to_displayImageFragment"
             app:destination="@id/displayImageFragment" />
-<!--        <argument-->
+        <action
+            android:id="@+id/action_chatFragment_to_recorderFragment"
+            app:destination="@id/recorderFragment" />
+        <!--        <argument-->
 <!--            android:name="RecentChat"-->
 <!--            app:argType="com.example.graduationproject.home.model.RecentChat" />-->
     </fragment>

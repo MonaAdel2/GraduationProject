@@ -2,31 +2,41 @@ package com.example.graduationproject.chat.view
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.text.Editable
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
+import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.annotation.RequiresApi
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.graduationproject.AppVMFactory
 import com.example.graduationproject.R
+import com.example.graduationproject.SharedPrefs
 import com.example.graduationproject.Utils
 import com.example.graduationproject.chat.model.Message
 import com.example.graduationproject.chat.viewModel.ChatViewModel
 import com.example.graduationproject.databinding.FragmentChatBinding
 import com.google.firebase.firestore.FirebaseFirestore
+import com.hitomi.cmlibrary.CircleMenu
 import com.theartofdev.edmodo.cropper.CropImage
 
 class ChatFragment : Fragment(), onImageMessageClicked {
@@ -40,6 +50,9 @@ class ChatFragment : Fragment(), onImageMessageClicked {
     private lateinit var messageAdapter: MessageAdapter
     private lateinit var chatViewModel: ChatViewModel
     private  lateinit var firestore: FirebaseFirestore
+
+
+    private lateinit var constraintLayout: ConstraintLayout
 
     // for images
     private lateinit var cropImageLauncher: ActivityResultLauncher<Any?>
@@ -76,6 +89,26 @@ class ChatFragment : Fragment(), onImageMessageClicked {
 
         binding.viewModel = chatViewModel
         binding.lifecycleOwner = viewLifecycleOwner
+
+        constraintLayout = binding.chatLayout
+//        binding.circleMenu.setMainMenu(Color.parseColor("#CDCDCD"),R.drawable.menu_icon,R.drawable.cancel_icon)
+//            .addSubMenu(Color.parseColor("#88bef5"),R.drawable.camera_icon)
+//            .addSubMenu(Color.parseColor("#83e85a"),R.drawable.record_ic)
+//            .setOnMenuSelectedListener {index->
+//                when (index) {
+//                    0 -> {
+//                        Toast.makeText(requireActivity(), "Camera", Toast.LENGTH_SHORT).show()
+////                        constraintLayout.setBackgroundColor(Color.parseColor("#ecfffb"))
+//                    }
+//                    1 -> {
+//                        Toast.makeText(requireActivity(), "Record", Toast.LENGTH_SHORT).show()
+////                        constraintLayout.setBackgroundColor(Color.parseColor("#96f7d2"))
+//                    }
+//
+//                }
+//
+//
+//            }
 
         binding.tvReceiverNameChat.text = args.UserData.userName
         Glide.with(requireContext()).load(args.UserData.imageUri)
@@ -124,13 +157,44 @@ class ChatFragment : Fragment(), onImageMessageClicked {
             }
         }
 
-        binding.iconCameraChat.setOnClickListener{
-            cropImageLauncher.launch(null)
+        binding.iconMenuChat.setOnClickListener{
+            showPopupMenu(it)
+
         }
 
 
     }
 
+    private fun showPopupMenu(view: android.view.View) {
+        val popupMenu = PopupMenu(requireContext(), view)
+        popupMenu.menuInflater.inflate(R.menu.chat_options, popupMenu.menu)
+
+        popupMenu.setOnMenuItemClickListener { menuItem: MenuItem ->
+            when (menuItem.itemId) {
+                R.id.action_send_image -> {
+                    Toast.makeText(requireContext(), "Send Imgae", Toast.LENGTH_SHORT).show()
+                    openGallery()
+                    true
+                }
+                R.id.action_speech_to_text -> {
+                    Toast.makeText(requireContext(), "Speech to text", Toast.LENGTH_SHORT).show()
+                    goToRecording()
+                    true
+                }
+                else -> false
+            }
+        }
+
+        popupMenu.show()
+    }
+
+    private fun openGallery(){
+        cropImageLauncher.launch(null) //******
+    }
+
+    private fun goToRecording(){
+        findNavController().navigate(R.id.action_chatFragment_to_recorderFragment)
+    }
 
 
     private fun initRecyclerView(messages: List<Message>) {
@@ -165,5 +229,19 @@ class ChatFragment : Fragment(), onImageMessageClicked {
             Log.d(TAG, "getOnImageMessageClicked: a text message is clicked....")
         }
         
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        val mySharedPrefs = SharedPrefs(requireContext())
+        var transcribedMessage = mySharedPrefs.getValue("transcribe")
+//        binding.etMessageChat.editText?.text = transcribedMessage
+        if(transcribedMessage!=null){
+            val editableText: Editable = Editable.Factory.getInstance().newEditable(transcribedMessage)
+            binding.etMessageChat.editText?.text = editableText
+            mySharedPrefs.setValue("transcribe", "")
+        }
+
     }
 }

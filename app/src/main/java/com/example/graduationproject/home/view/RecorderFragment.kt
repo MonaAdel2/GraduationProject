@@ -16,6 +16,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.graduationproject.R
+import com.example.graduationproject.SharedPrefs
 import com.example.graduationproject.authentication.signup.model.UserData
 import com.example.graduationproject.databinding.FragmentRecorderBinding
 import com.example.graduationproject.home.adapter.UsersAdapter
@@ -92,9 +93,9 @@ class RecorderFragment : Fragment() {
         }
         viewModel.transcription.observe(requireActivity()){
             binding.tvTranscription.text=it.toString()
+            val mySharedPrefs = SharedPrefs(requireContext())
+            mySharedPrefs.setValue("transcribe", it)
             Log.d("RecorderViewModel", "searchDocumentsByName: ")
-
-            viewModel.searchUsersByUserNamePrefix("رودينا")
         }
         viewModel.userList.observe(requireActivity()){ it->
             val adapter= UsersAdapter(it,requireContext())
@@ -171,9 +172,8 @@ class RecorderFragment : Fragment() {
                 audioRef.downloadUrl.addOnSuccessListener { uri ->
                     val downloadUrl = uri
                     Log.d("RecorderFragment", "Audio uploaded successfully. URL: $downloadUrl")
-                    viewModel.searchUsersByUserNamePrefix("رودينا")
-              //     viewModel.getTranscription(downloadUrl)
-                  //  Log.d("RecorderFragment", "Audio uploaded successfully. URL: $downloadUrl")
+                  viewModel.getTranscription(downloadUrl)
+                    Log.d("RecorderFragment", "Audio uploaded successfully. URL: $downloadUrl")
                 }.addOnFailureListener { e ->
                     // Failed to retrieve download URL
                     Log.e("RecorderFragment", "Error retrieving download URL: ${e.message}")

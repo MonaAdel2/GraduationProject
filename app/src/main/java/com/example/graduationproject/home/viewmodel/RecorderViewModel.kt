@@ -21,7 +21,6 @@ class RecorderViewModel(val recorderRepo: RecorderRepo): ViewModel()  {
 
     private val db = FirebaseFirestore.getInstance()
     fun getTranscription(url: Uri?) {
-
             viewModelScope.launch {
                 val response = recorderRepo.getTranscription(url)
                 _transcription.value=response.transcription

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".company.view.CompanyDetailsFragment"
+    android:background="@color/background">
+
+
+    <TextView
+        android:id="@+id/tv_company_name_details"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/roboto"
+        android:text="Company Name"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/headline1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_company_address_details"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:text="Address"
+        android:textColor="@color/white"
+        android:textSize="@dimen/headline2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_company_name_details" />
+
+    <TextView
+        android:id="@+id/tv_company_classfication_details"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:text="Classfication"
+        android:textColor="@color/white"
+        android:textSize="@dimen/headline2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_company_address_details" />
+
+    <TextView
+        android:id="@+id/tv_company_telephone_details"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:text="Telephone"
+        android:textColor="@color/white"
+        android:textSize="@dimen/headline2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_company_classfication_details" />
+
+    <TextView
+        android:id="@+id/tv_company_about_details"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+
+        android:text="Speech recognition enables machines to recognize and respond to human speech. ASR is a machine's ability to recognize (interpret) spoken
+language and convert it into a textual form, as well as take actions based on human-defined instructions [14]. In [15] The authors reported their
+experiences in building the Arabic version of CMU's Sphinx4 ASR system, where they presented a system to recognize the speech of Arabic
+digits. In [16] the authors proposed a dataset of Algerian Arabic speech, consisting of statements spoken by 300 Algerian speakers with different
+accents, picked from 11 areas of Algeria."
+        android:textColor="@color/white"
+        android:textSize="@dimen/headline2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_company_telephone_details" />
+</androidx.constraintlayout.widget.ConstraintLayout>

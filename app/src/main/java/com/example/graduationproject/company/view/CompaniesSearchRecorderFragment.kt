@@ -97,7 +97,6 @@ class CompaniesSearchRecorderFragment : Fragment() {
                   val action = CompaniesSearchRecorderFragmentDirections.actionCompaniesSearchRecorderFragmentToCompanyDetailsFragment(companyData)
                    findNavController().navigate(action)
                }
-
            })
        }
 
@@ -126,7 +125,7 @@ class CompaniesSearchRecorderFragment : Fragment() {
                 Log.e("RecorderFragment", "Error preparing mediaRecorder: ${e.message}")
             }
             start()
-            binding.btnSearchRecording.setImageResource(R.drawable.pause_ic)
+            binding.btnSearchRecording.setImageResource(R.drawable.ic_pause)
             isRecording = true
             isPaused = false
             //    binding.btnStoprecording.isEnabled = true

@@ -137,7 +137,7 @@ class RecorderFragment : Fragment() {
                 Log.e("RecorderFragment", "Error preparing mediaRecorder: ${e.message}")
             }
             start()
-            binding.btnRecording.setImageResource(R.drawable.pause_ic)
+            binding.btnRecording.setImageResource(R.drawable.ic_pause)
             isRecording = true
             isPaused = false
         //    binding.btnStoprecording.isEnabled = true
@@ -156,7 +156,7 @@ class RecorderFragment : Fragment() {
     private fun resumeRecording() {
         mediaRecorder.resume()
         isPaused = false
-        binding.btnRecording.setImageResource(R.drawable.pause_ic)
+        binding.btnRecording.setImageResource(R.drawable.ic_pause)
     }
 
     private fun stopRecording() {

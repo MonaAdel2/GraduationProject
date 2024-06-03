@@ -49,6 +49,9 @@
         <action
             android:id="@+id/action_HomeFragment_to_aboutUsFragment"
             app:destination="@id/aboutUsFragment" />
+        <action
+            android:id="@+id/action_HomeFragment_to_companiesFragment"
+            app:destination="@id/companiesFragment" />
     </fragment>
     <fragment
         android:id="@+id/usersFragment"
@@ -90,4 +93,9 @@
         android:name="com.example.graduationproject.aboutUs.view.AboutUsFragment"
         android:label="fragment_about_us"
         tools:layout="@layout/fragment_about_us" />
+    <fragment
+        android:id="@+id/companiesFragment"
+        android:name="com.example.graduationproject.company.CompaniesFragment"
+        android:label="fragment_companies"
+        tools:layout="@layout/fragment_companies" />
 </navigation>

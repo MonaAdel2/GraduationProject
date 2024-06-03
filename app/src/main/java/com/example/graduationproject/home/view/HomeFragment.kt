@@ -144,6 +144,10 @@ class HomeFragment : Fragment(), onRecentChatClicked {
                     logout()
                     true
                 }
+                R.id.action_companies ->{
+                    goToCompanies()
+                    true
+                }
                 else -> false
             }
         }
@@ -166,6 +170,9 @@ class HomeFragment : Fragment(), onRecentChatClicked {
             }
         }
 
+    }
+    private fun goToCompanies(){
+        findNavController().navigate(R.id.action_HomeFragment_to_companiesFragment)
     }
 
     private fun goToAboutUs(){

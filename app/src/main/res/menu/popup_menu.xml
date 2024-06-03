@@ -10,6 +10,10 @@
         android:id="@+id/action_about_us"
         android:title="About us"
         />
+    <item
+        android:id="@+id/action_companies"
+        android:title="Companies"
+        />
 
     <item
         android:id="@+id/action_logout"

@@ -33,6 +33,7 @@ class CompaniesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         gettingViewModelReady()
+        var companiesSv= binding.svCompanies
         viewModel.getListOfCompanies()
         viewModel.companiesList.observe(requireActivity()){ it->
             val adapter= CompaniesAdapter(it,requireContext())
@@ -46,7 +47,18 @@ class CompaniesFragment : Fragment() {
                 }
             })*/
         }
+        companiesSv.setOnQueryTextListener(object :
+            androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                viewModel.getCompanyWithText(query)
+                return true
+            }
 
+            override fun onQueryTextChange(newText: String): Boolean {
+               // viewModel.getCompanyWithText(newText)
+                return true
+            }
+        })
     }
     private fun gettingViewModelReady() {
         val companiesViewModelFactory =

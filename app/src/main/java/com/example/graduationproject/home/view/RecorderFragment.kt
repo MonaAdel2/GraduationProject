@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.graduationproject.R
@@ -34,6 +35,7 @@ import java.util.Locale
 
 
 class RecorderFragment : Fragment() {
+    val navArgs: RecorderFragmentArgs by navArgs()
     private val permissions = arrayOf(
         android.Manifest.permission.RECORD_AUDIO,
         android.Manifest.permission.WRITE_EXTERNAL_STORAGE
@@ -62,7 +64,7 @@ class RecorderFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         gettingViewModelReady()
-        binding.btnStoprecording.isEnabled = false
+    //    binding.btnStoprecording.isEnabled = false
         mediaRecorder = MediaRecorder()
         mediaPlayer = MediaPlayer()
         permissionGranted =
@@ -72,6 +74,10 @@ class RecorderFragment : Fragment() {
         }
 
         binding.btnRecording.setOnClickListener {
+            if (!permissionGranted) {
+                ActivityCompat.requestPermissions(requireActivity(), permissions, recordPermissionCode)
+                return@setOnClickListener
+            }
             when {
                 isPaused -> resumeRecording()
                 isRecording -> pauseRecorder()
@@ -79,17 +85,20 @@ class RecorderFragment : Fragment() {
             }
         }
 
-        binding.btnStoprecording.setOnClickListener {
+    /*    binding.btnStoprecording.setOnClickListener {
             stopRecording()
-            binding.btnStoprecording.isEnabled = false
-        }
+            stopRecording()
+           // binding.btnStoprecording.isEnabled = false
+        }*/
 
-        binding.btnPlayRecord.setOnClickListener {
-            if (!permissionGranted) {
+      binding.btnPlayRecord.setOnClickListener {
+           val action = RecorderFragmentDirections.actionRecorderFragmentToChatFragment(navArgs.userData)
+          findNavController().navigate(action)
+           /* if (!permissionGranted) {
                 ActivityCompat.requestPermissions(requireActivity(), permissions, recordPermissionCode)
                 return@setOnClickListener
             }
-            uploadRecordingToFirebase()
+            uploadRecordingToFirebase()*/
         }
         viewModel.transcription.observe(requireActivity()){
             binding.tvTranscription.text=it.toString()
@@ -97,7 +106,7 @@ class RecorderFragment : Fragment() {
             mySharedPrefs.setValue("transcribe", it)
             Log.d("RecorderViewModel", "searchDocumentsByName: ")
         }
-        viewModel.userList.observe(requireActivity()){ it->
+    /*    viewModel.userList.observe(requireActivity()){ it->
             val adapter= UsersAdapter(it,requireContext())
             binding.rvRecorderSearch.adapter= adapter
             binding.rvRecorderSearch.layoutManager = LinearLayoutManager(requireContext(),  RecyclerView.VERTICAL, false)
@@ -108,7 +117,7 @@ class RecorderFragment : Fragment() {
                     findNavController().navigate(action)
                 }
             })
-        }
+        }*/
     }
 
     private fun startRecording() {
@@ -137,7 +146,7 @@ class RecorderFragment : Fragment() {
             binding.btnRecording.setImageResource(R.drawable.pause_ic)
             isRecording = true
             isPaused = false
-            binding.btnStoprecording.isEnabled = true
+        //    binding.btnStoprecording.isEnabled = true
         }
     }
 
@@ -145,6 +154,9 @@ class RecorderFragment : Fragment() {
         mediaRecorder.pause()
         isPaused = true
         binding.btnRecording.setImageResource(R.drawable.recording_circle_ic)
+        stopRecording()
+        uploadRecordingToFirebase()
+
     }
 
     private fun resumeRecording() {

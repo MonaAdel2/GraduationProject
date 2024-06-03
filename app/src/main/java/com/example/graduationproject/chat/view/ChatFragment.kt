@@ -193,7 +193,8 @@ class ChatFragment : Fragment(), onImageMessageClicked {
     }
 
     private fun goToRecording(){
-        findNavController().navigate(R.id.action_chatFragment_to_recorderFragment)
+        var action = ChatFragmentDirections.actionChatFragmentToRecorderFragment(args.UserData)
+        findNavController().navigate(action)
     }
 
 

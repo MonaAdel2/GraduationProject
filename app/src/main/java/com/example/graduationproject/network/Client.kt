@@ -1,6 +1,7 @@
 package com.example.graduationproject.network
 
 import android.net.Uri
+import android.util.Log
 import com.example.graduationproject.company.model.CompanyData
 import com.example.graduationproject.company.model.CompanyTranscription
 import com.example.graduationproject.home.model.TranscriptionResponse

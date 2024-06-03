@@ -75,8 +75,8 @@ class HomeFragment : Fragment(), onRecentChatClicked {
         }
         recordBtn=binding.btnRecorder
         recordBtn.setOnClickListener {
-            val action = HomeFragmentDirections.actionHomeFragmentToRecorderFragment()
-            findNavController().navigate(action)
+          /*  val action = HomeFragmentDirections.actionHomeFragmentToRecorderFragment()
+            findNavController().navigate(action)*/
         }
 
         binding.dotsMenuHome.setOnClickListener{

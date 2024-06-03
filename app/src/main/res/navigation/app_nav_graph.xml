@@ -78,7 +78,14 @@
         android:id="@+id/recorderFragment"
         android:name="com.example.graduationproject.home.view.RecorderFragment"
         android:label="fragment_recorder"
-        tools:layout="@layout/fragment_recorder" />
+        tools:layout="@layout/fragment_recorder" >
+        <argument
+            android:name="userData"
+            app:argType="com.example.graduationproject.authentication.signup.model.UserData" />
+        <action
+            android:id="@+id/action_recorderFragment_to_chatFragment"
+            app:destination="@id/chatFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.graduationproject.profile.view.ProfileFragment"
@@ -97,5 +104,18 @@
         android:id="@+id/companiesFragment"
         android:name="com.example.graduationproject.company.CompaniesFragment"
         android:label="fragment_companies"
-        tools:layout="@layout/fragment_companies" />
+        tools:layout="@layout/fragment_companies" >
+        <action
+            android:id="@+id/action_companiesFragment_to_companyDetailsFragment3"
+            app:destination="@id/companyDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/companyDetailsFragment"
+        android:name="com.example.graduationproject.company.view.CompanyDetailsFragment"
+        android:label="fragment_company_details"
+        tools:layout="@layout/fragment_company_details" >
+        <argument
+            android:name="companyData"
+            app:argType="com.example.graduationproject.company.model.CompanyData" />
+    </fragment>
 </navigation>

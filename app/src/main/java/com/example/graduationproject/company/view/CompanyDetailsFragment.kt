@@ -5,11 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.navArgs
 import com.example.graduationproject.databinding.FragmentCompanyDetailsBinding
 
 
 class CompanyDetailsFragment : Fragment() {
-
+    private val navArgs: CompanyDetailsFragmentArgs by navArgs()
     private val TAG = "CompanyDetailsFragment"
 
     private var _binding: FragmentCompanyDetailsBinding? = null
@@ -21,8 +22,16 @@ class CompanyDetailsFragment : Fragment() {
     ): View? {
         _binding = FragmentCompanyDetailsBinding.inflate(inflater, container, false)
         var view = binding.root
-
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.tvCompanyNameDetails.text=navArgs.companyData.Name
+        binding.tvCompanyAboutDetails.text=navArgs.companyData.About
+        binding.tvCompanyTelephoneDetails.text=navArgs.companyData.Telephones
+        binding.tvCompanyAddressDetails.text=navArgs.companyData.Address
+        binding.tvCompanyClassficationDetails.text=navArgs.companyData.Classification
     }
 
 

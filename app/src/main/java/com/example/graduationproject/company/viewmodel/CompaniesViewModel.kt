@@ -22,7 +22,7 @@ class CompaniesViewModel(val companiesRepo: CompaniesRepo): ViewModel() {
     }
      fun getCompanyWithText(companyName: String){
          viewModelScope.launch {
-             Log.d("CompaniesViewModel", "Fetched company with text: ${companiesRepo.getCompanyWithText(companyName)}")
+             Log.d("CompaniesViewModel", "Fetched company with text: ${companyName}")
              _companiesList.value = companiesRepo.getCompanyWithText(companyName).result
          }
      }

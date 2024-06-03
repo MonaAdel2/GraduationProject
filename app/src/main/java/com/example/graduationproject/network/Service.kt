@@ -4,6 +4,7 @@ import android.net.Uri
 import com.example.graduationproject.company.model.CompanyData
 import com.example.graduationproject.company.model.CompanyTranscription
 import com.example.graduationproject.home.model.TranscriptionResponse
+import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Query
@@ -19,7 +20,7 @@ interface Service {
         suspend fun getCompanyWithAudio(@Query("audio_url") url: Uri?): CompanyTranscription
 
         @POST("company_text")
-        suspend fun getCompanyWithText(@Query("company_name") companyName: String): CompanyTranscription
+        suspend fun getCompanyWithText(@Body text: String): CompanyTranscription
 
         @GET("companies")
         suspend fun getListOfCompanies(): List<CompanyData>

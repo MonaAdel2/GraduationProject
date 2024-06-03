@@ -13,7 +13,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="16dp"
         android:fontFamily="@font/roboto"
         android:text="Company Name"
@@ -25,63 +25,130 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/tv_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Address:"
+        android:textColor="@color/white"
+        android:textSize="@dimen/headline2"
+        app:layout_constraintStart_toStartOf="@+id/tv_company_name_details"
+        app:layout_constraintTop_toBottomOf="@+id/tv_company_name_details" />
+
+    <TextView
         android:id="@+id/tv_company_address_details"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
-        android:text="Address"
+        android:layout_marginTop="10dp"
+        android:text="Address ....................."
+        android:textColor="@color/white"
+        android:textSize="17sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tv_company_name_details"
+        app:layout_constraintTop_toBottomOf="@+id/tv_address" />
+
+    <TextView
+        android:id="@+id/tv_classfication"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Classfication:"
         android:textColor="@color/white"
         android:textSize="@dimen/headline2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_company_name_details" />
+        app:layout_constraintStart_toStartOf="@+id/tv_company_name_details"
+        app:layout_constraintTop_toBottomOf="@+id/tv_company_address_details" />
 
     <TextView
         android:id="@+id/tv_company_classfication_details"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="16dp"
-        android:text="Classfication"
+        android:text="Classfication.........."
         android:textColor="@color/white"
-        android:textSize="@dimen/headline2"
+        android:textSize="17sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_company_address_details" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_classfication" />
+
+
+    <TextView
+        android:id="@+id/tv_telephone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Telephone:"
+        android:textColor="@color/white"
+        android:textSize="@dimen/headline2"
+        app:layout_constraintStart_toStartOf="@+id/tv_company_name_details"
+        app:layout_constraintTop_toBottomOf="@+id/tv_company_classfication_details" />
+
+    <!--    <TextView-->
+<!--        android:id="@+id/tv_company_about_details"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="16dp"-->
+<!--        android:layout_marginTop="24dp"-->
+<!--        android:layout_marginEnd="16dp"-->
+
+<!--        android:text="Speech recognition enables machines to recognize and respond to human speech. ASR is a machine's ability to recognize (interpret) spoken-->
+<!--language and convert it into a textual form, as well as take actions based on human-defined instructions [14]. In [15] The authors reported their-->
+<!--experiences in building the Arabic version of CMU's Sphinx4 ASR system, where they presented a system to recognize the speech of Arabic-->
+<!--digits. In [16] the authors proposed a dataset of Algerian Arabic speech, consisting of statements spoken by 300 Algerian speakers with different-->
+<!--accents, picked from 11 areas of Algeria."-->
+<!--        android:textColor="@color/white"-->
+<!--        android:textSize="@dimen/headline2"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/tv_company_telephone_details" />-->
 
     <TextView
         android:id="@+id/tv_company_telephone_details"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="16dp"
-        android:text="Telephone"
+        android:text="Telephone..........."
         android:textColor="@color/white"
-        android:textSize="@dimen/headline2"
+        android:textSize="17sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_company_classfication_details" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_telephone" />
+
 
     <TextView
+        android:id="@+id/tv_about"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="About the company:"
+        android:textColor="@color/white"
+        android:textSize="@dimen/headline2"
+        app:layout_constraintStart_toStartOf="@+id/tv_company_name_details"
+        app:layout_constraintTop_toBottomOf="@+id/tv_company_telephone_details" />
+
+    <com.borjabravo.readmoretextview.ReadMoreTextView
         android:id="@+id/tv_company_about_details"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="16dp"
-
-        android:text="Speech recognition enables machines to recognize and respond to human speech. ASR is a machine's ability to recognize (interpret) spoken
-language and convert it into a textual form, as well as take actions based on human-defined instructions [14]. In [15] The authors reported their
-experiences in building the Arabic version of CMU's Sphinx4 ASR system, where they presented a system to recognize the speech of Arabic
-digits. In [16] the authors proposed a dataset of Algerian Arabic speech, consisting of statements spoken by 300 Algerian speakers with different
-accents, picked from 11 areas of Algeria."
+        android:text="A glossary is a list of words and their meanings (A list of terms in a particular domain of knowledge – for example, a medical domain, or a banking domain – with their definitions.). The alphabetical listing of difficult words in the back of a book is an example of a glossary, for example:
+        Acute: Signifies a condition that begins abruptly and is sometimes severe, but the duration is short."
         android:textColor="@color/white"
-        android:textSize="@dimen/headline2"
+        android:textSize="17sp"
+        app:colorClickableText="@color/blue_icon_bg"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_company_telephone_details" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_about"
+        app:trimCollapsedText="@string/read_more"
+        app:trimExpandedText="@string/read_less"
+        app:trimLength="200"
+        app:trimMode="trimModeLength" />
 </androidx.constraintlayout.widget.ConstraintLayout>

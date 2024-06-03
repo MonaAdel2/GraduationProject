@@ -1,5 +1,6 @@
 package com.example.graduationproject.company.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -16,11 +17,12 @@ class CompaniesViewModel(val companiesRepo: CompaniesRepo): ViewModel() {
 
     fun getListOfCompanies(){
         viewModelScope.launch {
-            _companiesList.value=   companiesRepo.getListOfCompanies()
+            _companiesList.value= companiesRepo.getListOfCompanies()
         }
     }
      fun getCompanyWithText(companyName: String){
          viewModelScope.launch {
+             Log.d("CompaniesViewModel", "Fetched company with text: ${companiesRepo.getCompanyWithText(companyName)}")
              _companiesList.value = companiesRepo.getCompanyWithText(companyName).result
          }
      }

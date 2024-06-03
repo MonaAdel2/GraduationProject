@@ -1,3 +1,3 @@
 package com.example.graduationproject.company.model
 
-data class CompanyTranscription(val transcription:String,val result:List<CompanyData>)
+data class CompanyTranscription(val result:List<CompanyData>)

@@ -14,15 +14,15 @@ import com.example.graduationproject.company.model.CompanyData
 
 
 class CompaniesAdapter(private val data: List<CompanyData>, private val context: Context): RecyclerView.Adapter<CompaniesAdapter.myHolder>() {
-    private lateinit var onItemClickListener: CompaniesAdapter.OnItemClickListener
+   // private lateinit var onItemClickListener: CompaniesAdapter.OnItemClickListener
 
-   interface  OnItemClickListener{
+  /* interface  OnItemClickListener{
         fun onItemClicked(companyData: CompanyData)
     }
     fun setOnClickListener(listener: OnItemClickListener){
         onItemClickListener = listener
-    }
-    class myHolder(row: View, onItemClickListener: OnItemClickListener): RecyclerView.ViewHolder(row){
+    }*/
+    class myHolder(row: View/*, onItemClickListener: OnItemClickListener*/): RecyclerView.ViewHolder(row){
         var companyName= row.findViewById<TextView>(R.id.tv_company_name)
         var viewCompany= row.findViewById<ImageView>(R.id.iv_view_company)
 
@@ -30,7 +30,7 @@ class CompaniesAdapter(private val data: List<CompanyData>, private val context:
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): myHolder {
         val row = LayoutInflater.from(parent.context).inflate(R.layout.company_item,parent,false)
-        return myHolder(row,onItemClickListener)
+        return myHolder(row /*onItemClickListener*/)
     }
 
     override fun getItemCount(): Int {
@@ -43,8 +43,8 @@ class CompaniesAdapter(private val data: List<CompanyData>, private val context:
         holder.companyName.text= data[position].Name
 
 
-       holder.viewCompany.setOnClickListener {
+    /*   holder.viewCompany.setOnClickListener {
             onItemClickListener.onItemClicked(data[position])
-        }
+        }*/
     }
 }

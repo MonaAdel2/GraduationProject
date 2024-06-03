@@ -92,4 +92,6 @@ dependencies {
 
     implementation ("com.github.Hitomis:CircleMenu:v1.1.0")
 
+    implementation ("com.borjabravo:readmoretextview:2.1.0")
+
 }

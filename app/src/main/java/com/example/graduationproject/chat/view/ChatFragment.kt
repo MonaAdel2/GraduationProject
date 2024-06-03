@@ -157,7 +157,7 @@ class ChatFragment : Fragment(), onImageMessageClicked {
             }
         }
 
-        binding.iconMenuChat.setOnClickListener{
+        binding.cardView2.setOnClickListener{
             showPopupMenu(it)
 
         }

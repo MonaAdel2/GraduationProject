@@ -1,10 +1,12 @@
 package com.example.graduationproject.company
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -33,11 +35,17 @@ class CompaniesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         gettingViewModelReady()
+        var companiesSv= binding.svCompanies
         viewModel.getListOfCompanies()
         viewModel.companiesList.observe(requireActivity()){ it->
-            val adapter= CompaniesAdapter(it,requireContext())
-            binding.rvCompanies.adapter= adapter
-            binding.rvCompanies.layoutManager = LinearLayoutManager(requireContext(),  RecyclerView.VERTICAL, false)
+            if (it != null) {
+                Log.d("TAG", "onViewCreated: $it")
+                val adapter = CompaniesAdapter(it, requireContext())
+                binding.rvCompanies.adapter = adapter
+                binding.rvCompanies.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
+            } else {
+                Log.e("TAG", "Company list is null")
+            }
           /*  adapter.setOnClickListener(object : UsersAdapter.OnItemClickListener {
                 override fun onItemClicked(userData: UserData) {
 //                    val  action = UsersFragmentDirections.actionUsersFragmentToChatFragment2(user?.uid.toString(),userData)
@@ -46,7 +54,19 @@ class CompaniesFragment : Fragment() {
                 }
             })*/
         }
-
+        companiesSv.setOnQueryTextListener(object :
+            androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                viewModel.getCompanyWithText(query)
+                return true
+            }
+            override fun onQueryTextChange(newText: String): Boolean {
+                if(newText==""){
+                    viewModel.getListOfCompanies()
+                }
+                return true
+            }
+        })
     }
     private fun gettingViewModelReady() {
         val companiesViewModelFactory =

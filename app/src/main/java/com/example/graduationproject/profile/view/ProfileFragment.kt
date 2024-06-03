@@ -2,27 +2,53 @@ package com.example.graduationproject.profile.view
 
 import android.annotation.SuppressLint
 import android.app.Dialog
+import android.content.Context
+import android.content.Intent
 import android.graphics.Color
+import android.graphics.ImageDecoder
 import android.graphics.drawable.ColorDrawable
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContract
+import androidx.annotation.RequiresApi
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.example.graduationproject.R
+import com.example.graduationproject.Utils
 import com.example.graduationproject.chat.view.ChatFragmentArgs
 import com.example.graduationproject.databinding.FragmentHomeBinding
 import com.example.graduationproject.databinding.FragmentProfileBinding
 import com.example.graduationproject.profile.viewmodel.ProfileViewModel
 import com.google.android.material.textfield.TextInputLayout
+import com.theartofdev.edmodo.cropper.CropImage
 
 class ProfileFragment : Fragment() {
     private lateinit var  binding : FragmentProfileBinding
     private lateinit var profileViewModel: ProfileViewModel
     val args: ProfileFragmentArgs by navArgs()
+
+    // for images
+    private lateinit var cropImageLauncher: ActivityResultLauncher<Any?>
+
+    private val cropActivityContract = object : ActivityResultContract<Any?, Uri?>(){
+        override fun createIntent(context: Context, input: Any?): Intent {
+            return CropImage.activity()
+                .getIntent(requireActivity())
+        }
+
+        override fun parseResult(resultCode: Int, intent: Intent?): Uri? {
+            return CropImage.getActivityResult(intent)?.uri
+
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -31,6 +57,7 @@ class ProfileFragment : Fragment() {
         return binding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.P)
     @SuppressLint("MissingInflatedId")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -84,7 +111,32 @@ class ProfileFragment : Fragment() {
                 myDialog.dismiss()
             }
         }
+
+        binding.tvChangeAccountImage.setOnClickListener {
+            cropImageLauncher.launch(null)
         }
+
+        cropImageLauncher = registerForActivityResult(cropActivityContract){
+            it?.let { uri ->
+//                binding.btnUploadImgRegister.setImageURI(uri)
+
+                // image displayed in message
+
+                val source = ImageDecoder.createSource(requireActivity().contentResolver, uri)
+                val bitmap = ImageDecoder.decodeBitmap(source)
+                profileViewModel.uploadImageToFirebaseStorage(bitmap){imageUploaded->
+                    Glide.with(requireContext())
+                        .load(imageUploaded)
+                        .placeholder(R.drawable.ic_profile)
+                        .into(binding.ivAccountProfilePicture)
+                    profileViewModel.updateProfileInFirestore(Utils.getUidLoggedIn(), imageUploaded)
+                }
+            }
+        }
+
+    }
+
+
     private fun checkNotEmpty(input: TextInputLayout): Boolean{
         if(input.editText?.text.toString().isEmpty()){
             input.error= "This field is required."

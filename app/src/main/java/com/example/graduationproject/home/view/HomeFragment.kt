@@ -33,8 +33,6 @@ class HomeFragment : Fragment(), onRecentChatClicked {
     private val TAG = "HomeFragment"
      private lateinit var userBtn: FloatingActionButton
     private lateinit var  binding : FragmentHomeBinding
-    private lateinit var recordBtn: FloatingActionButton
-
     private lateinit var recentChatViewModel: RecentChatsViewModel
     private lateinit var recentChatsAdapter: RecentChatsAdapter
     private lateinit var firestore: FirebaseFirestore
@@ -73,12 +71,6 @@ class HomeFragment : Fragment(), onRecentChatClicked {
             val action = HomeFragmentDirections.actionHomeFragmentToUsersFragment()
             findNavController().navigate(action)
         }
-        recordBtn=binding.btnRecorder
-        recordBtn.setOnClickListener {
-          /*  val action = HomeFragmentDirections.actionHomeFragmentToRecorderFragment()
-            findNavController().navigate(action)*/
-        }
-
         binding.dotsMenuHome.setOnClickListener{
             showPopupMenu(it)
         }

@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.R
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -36,9 +37,14 @@ class CompaniesFragment : Fragment() {
         gettingViewModelReady()
         var companiesSv= binding.svCompanies
         viewModel.getListOfCompanies()
+        binding.btnSearchByRecord.setOnClickListener {
+            var action = CompaniesFragmentDirections.actionCompaniesFragmentToCompaniesSearchRecorderFragment()
+            findNavController().navigate(action)
+        }
+
+
         viewModel.companiesList.observe(requireActivity()){ it->
             if (it != null) {
-
                 val adapter = CompaniesAdapter(it, requireContext())
                 binding.rvCompanies.adapter = adapter
                 binding.rvCompanies.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)

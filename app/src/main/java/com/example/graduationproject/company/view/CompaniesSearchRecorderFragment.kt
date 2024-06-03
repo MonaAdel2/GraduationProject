@@ -1,4 +1,4 @@
-package com.example.graduationproject.home.view
+package com.example.graduationproject.company.view
 
 import android.content.pm.PackageManager
 import android.media.MediaPlayer
@@ -10,18 +10,22 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.graduationproject.R
-import com.example.graduationproject.SharedPrefs
-import com.example.graduationproject.authentication.signup.model.UserData
-import com.example.graduationproject.databinding.FragmentRecorderBinding
-import com.example.graduationproject.home.adapter.UsersAdapter
+import com.example.graduationproject.company.adapter.CompaniesAdapter
+import com.example.graduationproject.company.model.CompanyData
+import com.example.graduationproject.company.repo.CompaniesRepoImp
+import com.example.graduationproject.company.viewmodel.CompaniesSearchRecorderFactory
+import com.example.graduationproject.company.viewmodel.CompaniesSearchRecorderViewModel
+import com.example.graduationproject.company.viewmodel.CompaniesViewModel
+import com.example.graduationproject.databinding.FragmentCompaniesSearchRecorderBinding
 import com.example.graduationproject.home.repo.RecorderRepoImp
+import com.example.graduationproject.home.view.RecorderFragmentDirections
 import com.example.graduationproject.home.viewmodel.RecorderViewModel
 import com.example.graduationproject.home.viewmodel.RecorderViewModelFactory
 import com.example.graduationproject.network.Client
@@ -33,14 +37,12 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-
-class RecorderFragment : Fragment() {
-    val navArgs: RecorderFragmentArgs by navArgs()
+class CompaniesSearchRecorderFragment : Fragment() {
     private val permissions = arrayOf(
         android.Manifest.permission.RECORD_AUDIO,
         android.Manifest.permission.WRITE_EXTERNAL_STORAGE
     )
-    private lateinit var binding: FragmentRecorderBinding
+    private lateinit var binding: FragmentCompaniesSearchRecorderBinding
     private lateinit var mediaRecorder: MediaRecorder
     private var permissionGranted = false
     private var dirPath = ""
@@ -51,20 +53,18 @@ class RecorderFragment : Fragment() {
     private val recordPermissionCode = 111
     private val storage = Firebase.storage
     private val storageReference = storage.reference.child("audio")
-    lateinit var viewModel : RecorderViewModel
-
+    lateinit var viewModel : CompaniesSearchRecorderViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentRecorderBinding.inflate(inflater, container, false)
+        binding = FragmentCompaniesSearchRecorderBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         gettingViewModelReady()
-    //    binding.btnStoprecording.isEnabled = false
         mediaRecorder = MediaRecorder()
         mediaPlayer = MediaPlayer()
         permissionGranted =
@@ -72,8 +72,7 @@ class RecorderFragment : Fragment() {
         if (!permissionGranted) {
             ActivityCompat.requestPermissions(requireActivity(), permissions, recordPermissionCode)
         }
-
-        binding.btnRecording.setOnClickListener {
+        binding.btnSearchRecording.setOnClickListener {
             if (!permissionGranted) {
                 ActivityCompat.requestPermissions(requireActivity(), permissions, recordPermissionCode)
                 return@setOnClickListener
@@ -84,36 +83,26 @@ class RecorderFragment : Fragment() {
                 else -> startRecording()
             }
         }
+        binding.btnSearchAboutRecord.setOnClickListener {
+            Log.d("SearchAboutRecord", "onViewCreated: searched")
+            uploadRecordingToFirebase()
+        }
+         viewModel.companiesList.observe(requireActivity()){ it->
+             binding.tvTranscription.text= it.transcription
+           val adapter= CompaniesAdapter(it.result,requireContext())
+           binding.rvSearchCompaniesRecord.adapter= adapter
+           binding.rvSearchCompaniesRecord.layoutManager = LinearLayoutManager(requireContext(),  RecyclerView.VERTICAL, false)
+           adapter.setOnClickListener(object : CompaniesAdapter.OnItemClickListener {
+               override fun onItemClicked(companyData: CompanyData) {
+                  val action = CompaniesSearchRecorderFragmentDirections.actionCompaniesSearchRecorderFragmentToCompanyDetailsFragment(companyData)
+                   findNavController().navigate(action)
+               }
 
-      binding.btnPlayRecord.setOnClickListener {
-           val action = RecorderFragmentDirections.actionRecorderFragmentToChatFragment(navArgs.userData)
-          findNavController().navigate(action)
-           /* if (!permissionGranted) {
-                ActivityCompat.requestPermissions(requireActivity(), permissions, recordPermissionCode)
-                return@setOnClickListener
-            }
-            uploadRecordingToFirebase()*/
-        }
-        viewModel.transcription.observe(requireActivity()){
-            binding.tvTranscription.text=it.toString()
-            val mySharedPrefs = SharedPrefs(requireContext())
-            mySharedPrefs.setValue("transcribe", it)
-            Log.d("RecorderViewModel", "searchDocumentsByName: ")
-        }
-    /*    viewModel.userList.observe(requireActivity()){ it->
-            val adapter= UsersAdapter(it,requireContext())
-            binding.rvRecorderSearch.adapter= adapter
-            binding.rvRecorderSearch.layoutManager = LinearLayoutManager(requireContext(),  RecyclerView.VERTICAL, false)
-            adapter.setOnClickListener(object : UsersAdapter.OnItemClickListener {
-                override fun onItemClicked(userData: UserData) {
-//                    val  action = UsersFragmentDirections.actionUsersFragmentToChatFragment2(user?.uid.toString(),userData)
-                    val  action = UsersFragmentDirections.actionUsersFragmentToChatFragment2(userData)
-                    findNavController().navigate(action)
-                }
-            })
-        }*/
+           })
+       }
+
+
     }
-
     private fun startRecording() {
         if (!permissionGranted) {
             ActivityCompat.requestPermissions(requireActivity(), permissions, recordPermissionCode)
@@ -137,26 +126,24 @@ class RecorderFragment : Fragment() {
                 Log.e("RecorderFragment", "Error preparing mediaRecorder: ${e.message}")
             }
             start()
-            binding.btnRecording.setImageResource(R.drawable.pause_ic)
+            binding.btnSearchRecording.setImageResource(R.drawable.pause_ic)
             isRecording = true
             isPaused = false
-        //    binding.btnStoprecording.isEnabled = true
+            //    binding.btnStoprecording.isEnabled = true
         }
     }
 
     private fun pauseRecorder() {
         mediaRecorder.pause()
         isPaused = true
-        binding.btnRecording.setImageResource(R.drawable.recording_circle_ic)
+        binding.btnSearchRecording.setImageResource(R.drawable.recording_circle_ic)
         stopRecording()
-        uploadRecordingToFirebase()
-
     }
 
     private fun resumeRecording() {
         mediaRecorder.resume()
         isPaused = false
-        binding.btnRecording.setImageResource(R.drawable.pause_ic)
+        binding.btnSearchRecording.setImageResource(R.drawable.pause_ic)
     }
 
     private fun stopRecording() {
@@ -166,7 +153,7 @@ class RecorderFragment : Fragment() {
         }
         isRecording = false
         isPaused = false
-        binding.btnRecording.setImageResource(R.drawable.recording_circle_ic)
+        binding.btnSearchRecording.setImageResource(R.drawable.recording_circle_ic)
     }
 
     private fun uploadRecordingToFirebase() {
@@ -178,7 +165,8 @@ class RecorderFragment : Fragment() {
                 audioRef.downloadUrl.addOnSuccessListener { uri ->
                     val downloadUrl = uri
                     Log.d("RecorderFragment", "Audio uploaded successfully. URL: $downloadUrl")
-                  viewModel.getTranscription(downloadUrl)
+                    Log.d("SearchAboutRecord", "onViewCreated: $downloadUrl")
+                    viewModel.getCompanyWithAudio(downloadUrl)
                     Log.d("RecorderFragment", "Audio uploaded successfully. URL: $downloadUrl")
                 }.addOnFailureListener { e ->
                     // Failed to retrieve download URL
@@ -198,12 +186,12 @@ class RecorderFragment : Fragment() {
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == recordPermissionCode && grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            binding.btnRecording.isEnabled = true
+            binding.btnSearchRecording.isEnabled = true
         }
     }
     private fun gettingViewModelReady() {
-        val recorderViewModelFactory =
-            RecorderViewModelFactory(RecorderRepoImp(Client))
-        viewModel = ViewModelProvider(this, recorderViewModelFactory).get(RecorderViewModel::class.java)
+        val companiesSearchRecorderFactory =
+            CompaniesSearchRecorderFactory(CompaniesRepoImp(Client))
+        viewModel = ViewModelProvider(this, companiesSearchRecorderFactory).get(CompaniesSearchRecorderViewModel::class.java)
     }
 }

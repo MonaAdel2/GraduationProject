@@ -4,6 +4,7 @@ import android.net.Uri
 import android.util.Log
 import com.example.graduationproject.company.model.CompanyData
 import com.example.graduationproject.company.model.CompanyTranscription
+import com.example.graduationproject.company.model.CompanyTranscriptionWithAudio
 import com.example.graduationproject.home.model.TranscriptionResponse
 import okhttp3.OkHttpClient
 import java.net.URI
@@ -15,7 +16,7 @@ object Client:RemoteDataSource {
         return Helper.retrofit.create(Service::class.java).getTranscription(url)
     }
 
-    override suspend fun getCompanyWithAudio(url: Uri?): CompanyTranscription {
+    override suspend fun getCompanyWithAudio(url: Uri?): CompanyTranscriptionWithAudio {
         return Helper.retrofit.create(Service::class.java).getCompanyWithAudio(url)
     }
 

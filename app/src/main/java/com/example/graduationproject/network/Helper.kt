@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 object Helper {
     val gson = GsonBuilder().serializeNulls().create()
     val retrofit = Retrofit.Builder()
-        .baseUrl("https://f904-196-204-183-233.ngrok-free.app/")
+        .baseUrl("https://d015-196-204-183-233.ngrok-free.app/")
         .addConverterFactory(GsonConverterFactory.create(gson))
         .build()
 }

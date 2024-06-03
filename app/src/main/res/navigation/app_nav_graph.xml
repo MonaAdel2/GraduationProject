@@ -108,6 +108,9 @@
         <action
             android:id="@+id/action_companiesFragment_to_companyDetailsFragment3"
             app:destination="@id/companyDetailsFragment" />
+        <action
+            android:id="@+id/action_companiesFragment_to_companiesSearchRecorderFragment"
+            app:destination="@id/companiesSearchRecorderFragment" />
     </fragment>
     <fragment
         android:id="@+id/companyDetailsFragment"
@@ -117,5 +120,14 @@
         <argument
             android:name="companyData"
             app:argType="com.example.graduationproject.company.model.CompanyData" />
+    </fragment>
+    <fragment
+        android:id="@+id/companiesSearchRecorderFragment"
+        android:name="com.example.graduationproject.company.view.CompaniesSearchRecorderFragment"
+        android:label="fragment_companies_search_recorder"
+        tools:layout="@layout/fragment_companies_search_recorder" >
+        <action
+            android:id="@+id/action_companiesSearchRecorderFragment_to_companyDetailsFragment"
+            app:destination="@id/companyDetailsFragment" />
     </fragment>
 </navigation>

@@ -1,11 +1,13 @@
 package com.example.graduationproject.company
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.R
@@ -36,6 +38,9 @@ class CompaniesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         gettingViewModelReady()
         var companiesSv= binding.svCompanies
+        val searchAutoComplete = companiesSv.findViewById<EditText>(androidx.appcompat.R.id.search_src_text)
+        searchAutoComplete.setTextColor(Color.parseColor("#FFFFFF"))
+        searchAutoComplete.setHintTextColor(Color.parseColor("#FFFFFF"))
         viewModel.getListOfCompanies()
         binding.btnSearchByRecord.setOnClickListener {
             var action = CompaniesFragmentDirections.actionCompaniesFragmentToCompaniesSearchRecorderFragment()

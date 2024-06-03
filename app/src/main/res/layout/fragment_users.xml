@@ -32,7 +32,7 @@
                android:layout_height="wrap_content"
                android:animationCache="true"
                android:hint="search here"
-               android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+               android:textAppearance="@style/SearchViewText"
                app:iconifiedByDefault="false"
                app:layout_constraintEnd_toEndOf="parent"
                app:layout_constraintStart_toStartOf="parent"

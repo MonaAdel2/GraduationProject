@@ -6,23 +6,21 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.SearchView
-import android.widget.SearchView.OnQueryTextListener
-import android.widget.Toast
+import android.widget.EditText
+import android.graphics.Color
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.graduationproject.R
+
 import com.example.graduationproject.authentication.signup.model.UserData
-import com.example.graduationproject.databinding.FragmentHomeBinding
+
 import com.example.graduationproject.databinding.FragmentUsersBinding
 import com.example.graduationproject.home.adapter.UsersAdapter
 import com.example.graduationproject.home.viewmodel.UserFragmentViewModel
-import com.google.firebase.Firebase
+
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.auth.User
-import com.google.firebase.firestore.firestore
+
+
 
 
 class UsersFragment : Fragment() {
@@ -42,7 +40,10 @@ class UsersFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
        val db= FirebaseAuth.getInstance()
-
+        val searchView = binding.svUsers
+        val searchAutoComplete = searchView.findViewById<EditText>(androidx.appcompat.R.id.search_src_text)
+        searchAutoComplete.setTextColor(Color.parseColor("#FFFFFF"))
+        searchAutoComplete.setHintTextColor(Color.parseColor("#FFFFFF"))
         val user = db.currentUser
         userFragmentViewModel=UserFragmentViewModel()
         userFragmentViewModel.getUsers()
@@ -67,6 +68,7 @@ class UsersFragment : Fragment() {
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
+
                 userFragmentViewModel.searchUsersByUserNamePrefix(newText)
                 return true
             }

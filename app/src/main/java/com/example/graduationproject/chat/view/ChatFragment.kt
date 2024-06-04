@@ -14,6 +14,8 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
@@ -42,11 +44,14 @@ import com.theartofdev.edmodo.cropper.CropImage
 class ChatFragment : Fragment(), onImageMessageClicked {
 
     private val TAG = "ChatFragment"
-
+    private var clicked = false
     private var _binding: FragmentChatBinding? = null
     private val binding get() = _binding!!
     val args: ChatFragmentArgs by navArgs()
-
+   private val rotateOpen:Animation by lazy { AnimationUtils.loadAnimation(requireContext(),R.anim.rotate_open_anim) }
+    private val rotateClose:Animation by lazy { AnimationUtils.loadAnimation(requireContext(),R.anim.rotate_close_anim) }
+    private val toButton:Animation by lazy { AnimationUtils.loadAnimation(requireContext(),R.anim.to_button_anim) }
+    private val fromButton:Animation by lazy { AnimationUtils.loadAnimation(requireContext(),R.anim.from_button_anim) }
     private lateinit var messageAdapter: MessageAdapter
     private lateinit var chatViewModel: ChatViewModel
     private  lateinit var firestore: FirebaseFirestore
@@ -157,36 +162,85 @@ class ChatFragment : Fragment(), onImageMessageClicked {
             }
         }
 
-        binding.cardView2.setOnClickListener{
+     /*   binding.cardView2.setOnClickListener{
             showPopupMenu(it)
 
-        }
+        }*/
 
+        binding.fbChattingOptions.setOnClickListener {
+                onChattingOptionsClicked()
+        }
+        binding.fbSendImage.setOnClickListener {
+            Toast.makeText(requireContext(), "Send Imgae", Toast.LENGTH_SHORT).show()
+            openGallery()
+        }
+        binding.fbSpeechToText.setOnClickListener {
+            Toast.makeText(requireContext(), "Speech to text", Toast.LENGTH_SHORT).show()
+            goToRecording()
+        }
 
     }
 
-    private fun showPopupMenu(view: android.view.View) {
-        val popupMenu = PopupMenu(requireContext(), view)
-        popupMenu.menuInflater.inflate(R.menu.chat_options, popupMenu.menu)
-
-        popupMenu.setOnMenuItemClickListener { menuItem: MenuItem ->
-            when (menuItem.itemId) {
-                R.id.action_send_image -> {
-                    Toast.makeText(requireContext(), "Send Imgae", Toast.LENGTH_SHORT).show()
-                    openGallery()
-                    true
-                }
-                R.id.action_speech_to_text -> {
-                    Toast.makeText(requireContext(), "Speech to text", Toast.LENGTH_SHORT).show()
-                    goToRecording()
-                    true
-                }
-                else -> false
-            }
-        }
-
-        popupMenu.show()
+    private fun onChattingOptionsClicked() {
+        setVisibility(clicked)
+        setAnimation(clicked)
+        clicked = !clicked
     }
+
+    private fun setAnimation(clicked:Boolean) {
+        if(!clicked){
+            binding.fbSendImage.startAnimation(fromButton)
+            binding.fbSpeechToText.startAnimation(fromButton)
+            binding.fbChattingOptions.startAnimation(rotateOpen)
+        }else{
+            binding.fbSendImage.startAnimation(toButton)
+            binding.fbSpeechToText.startAnimation(toButton)
+            binding.fbChattingOptions.startAnimation(rotateClose)
+        }
+    }
+
+    private fun setVisibility(clicked:Boolean) {
+        if(!clicked){
+            binding.fbSendImage.visibility= View.VISIBLE
+            binding.fbSpeechToText.visibility=View.VISIBLE
+        }else{
+            binding.fbSendImage.visibility= View.INVISIBLE
+            binding.fbSpeechToText.visibility=View.INVISIBLE
+        }
+    }
+    private fun setClickable(clicked:Boolean){
+        if(!clicked){
+            binding.fbSendImage.isClickable= false
+            binding.fbSpeechToText.isClickable=false
+        }else{
+            binding.fbSendImage.isClickable= true
+            binding.fbSpeechToText.isClickable= true
+
+        }
+    }
+
+    /* private fun showPopupMenu(view: android.view.View) {
+         val popupMenu = PopupMenu(requireContext(), view)
+         popupMenu.menuInflater.inflate(R.menu.chat_options, popupMenu.menu)
+
+         popupMenu.setOnMenuItemClickListener { menuItem: MenuItem ->
+             when (menuItem.itemId) {
+                 R.id.action_send_image -> {
+                     Toast.makeText(requireContext(), "Send Imgae", Toast.LENGTH_SHORT).show()
+                     openGallery()
+                     true
+                 }
+                 R.id.action_speech_to_text -> {
+                     Toast.makeText(requireContext(), "Speech to text", Toast.LENGTH_SHORT).show()
+                     goToRecording()
+                     true
+                 }
+                 else -> false
+             }
+         }
+
+         popupMenu.show()
+     }*/
 
     private fun openGallery(){
         cropImageLauncher.launch(null) //******

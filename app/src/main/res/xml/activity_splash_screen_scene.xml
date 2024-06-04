@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        motion:constraintSetEnd="@+id/end"
+        motion:constraintSetStart="@id/start"
+        motion:duration="1500">
+       <KeyFrameSet>
+       </KeyFrameSet>
+    </Transition>
+
+    <ConstraintSet android:id="@+id/start">
+        <Constraint
+            android:id="@+id/constraintLayout"
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintVertical_bias="0.259"
+            motion:layout_constraintHorizontal_bias="0.496"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            android:scaleX="10"
+            android:scaleY="10" />
+        <Constraint
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_editor_absoluteY="291dp"
+            motion:layout_editor_absoluteX="139dp"
+            android:scaleX="0"
+            android:scaleY="0" />
+        <Constraint
+            android:id="@+id/logo"
+            android:layout_width="200dp"
+            android:layout_height="120dp"
+            motion:layout_editor_absoluteY="171dp"
+            motion:layout_editor_absoluteX="106dp"
+            android:scaleX="0"
+            android:scaleY="0" />
+        <Constraint
+            android:id="@+id/tv_name_white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_editor_absoluteY="291dp"
+            motion:layout_editor_absoluteX="139dp"
+            android:scaleX="1"
+            android:scaleY="1" />
+        <Constraint
+            android:id="@+id/logo_white"
+            android:layout_width="200dp"
+            android:layout_height="120dp"
+            motion:layout_editor_absoluteY="171dp"
+            motion:layout_editor_absoluteX="106dp"
+            android:scaleX="1"
+            android:scaleY="1" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+        <Constraint
+            android:id="@+id/constraintLayout"
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintVertical_bias="0.259"
+            motion:layout_constraintHorizontal_bias="0.496"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            android:scaleX="0"
+            android:scaleY="0" />
+        <Constraint
+            android:id="@+id/tv_name_white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_editor_absoluteY="291dp"
+            motion:layout_editor_absoluteX="139dp"
+            android:scaleY="0"
+            android:scaleX="0" />
+        <Constraint
+            android:id="@+id/logo_white"
+            android:layout_width="200dp"
+            android:layout_height="120dp"
+            motion:layout_editor_absoluteY="171dp"
+            motion:layout_editor_absoluteX="106dp"
+            android:scaleX="0"
+            android:scaleY="0" />
+        <Constraint
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_editor_absoluteY="291dp"
+            motion:layout_editor_absoluteX="139dp"
+            android:scaleX="1"
+            android:scaleY="1" />
+        <Constraint
+            android:id="@+id/logo"
+            android:layout_width="200dp"
+            android:layout_height="120dp"
+            motion:layout_editor_absoluteY="171dp"
+            motion:layout_editor_absoluteX="106dp"
+            android:scaleX="1"
+            android:scaleY="1" />
+    </ConstraintSet>
+</MotionScene>

@@ -13,6 +13,10 @@
     <style name="EditTextThemeOverlay" parent="ThemeOverlay.AppCompat">
         <item name="colorAccent">@color/white</item>
     </style>
+    <style name="NavigationDrawerSubheaderStyle" parent="TextAppearance.AppCompat.Subhead">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:titleTextColor">@color/white</item>
+    </style>
 
 <!--    <style name="optionMenuText" parent="android:TextAppearance.Widget.PopupMenu.Small">-->
 <!--        <item name="android:textColor">@android:color/black</item>-->

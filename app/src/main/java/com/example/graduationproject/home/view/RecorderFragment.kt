@@ -1,6 +1,10 @@
 package com.example.graduationproject.home.view
 
+import android.app.Dialog
+import android.content.Context
 import android.content.pm.PackageManager
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.media.MediaPlayer
 import android.media.MediaRecorder
 import android.net.Uri
@@ -41,6 +45,7 @@ class RecorderFragment : Fragment() {
         android.Manifest.permission.WRITE_EXTERNAL_STORAGE
     )
     private lateinit var binding: FragmentRecorderBinding
+    private lateinit  var myDialog : Dialog
     private lateinit var mediaRecorder: MediaRecorder
     private var permissionGranted = false
     private var dirPath = ""
@@ -64,7 +69,7 @@ class RecorderFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         gettingViewModelReady()
-    //    binding.btnStoprecording.isEnabled = false
+        myDialog=Dialog(requireContext())
         mediaRecorder = MediaRecorder()
         mediaPlayer = MediaPlayer()
         permissionGranted =
@@ -90,28 +95,14 @@ class RecorderFragment : Fragment() {
           mySharedPrefs.setValue("transcribe",  binding.tvTranscription.text.toString())
            val action = RecorderFragmentDirections.actionRecorderFragmentToChatFragment(navArgs.userData)
           findNavController().navigate(action)
-           /* if (!permissionGranted) {
-                ActivityCompat.requestPermissions(requireActivity(), permissions, recordPermissionCode)
-                return@setOnClickListener
-            }
-            uploadRecordingToFirebase()*/
+
         }
         viewModel.transcription.observe(requireActivity()){
+            myDialog.dismiss()
             binding.tvTranscription.text=it.toString()
             Log.d("RecorderViewModel", "searchDocumentsByName: ")
         }
-    /*    viewModel.userList.observe(requireActivity()){ it->
-            val adapter= UsersAdapter(it,requireContext())
-            binding.rvRecorderSearch.adapter= adapter
-            binding.rvRecorderSearch.layoutManager = LinearLayoutManager(requireContext(),  RecyclerView.VERTICAL, false)
-            adapter.setOnClickListener(object : UsersAdapter.OnItemClickListener {
-                override fun onItemClicked(userData: UserData) {
-//                    val  action = UsersFragmentDirections.actionUsersFragmentToChatFragment2(user?.uid.toString(),userData)
-                    val  action = UsersFragmentDirections.actionUsersFragmentToChatFragment2(userData)
-                    findNavController().navigate(action)
-                }
-            })
-        }*/
+
     }
 
     private fun startRecording() {
@@ -140,7 +131,6 @@ class RecorderFragment : Fragment() {
             binding.btnRecording.setImageResource(R.drawable.ic_pause)
             isRecording = true
             isPaused = false
-        //    binding.btnStoprecording.isEnabled = true
         }
     }
 
@@ -170,6 +160,9 @@ class RecorderFragment : Fragment() {
     }
 
     private fun uploadRecordingToFirebase() {
+        createDialog()
+        dialogShow()
+
         val file = Uri.fromFile(File("$dirPath$fileName.mp4"))
         val audioRef = storageReference.child("$fileName.wav")
 
@@ -205,5 +198,17 @@ class RecorderFragment : Fragment() {
         val recorderViewModelFactory =
             RecorderViewModelFactory(RecorderRepoImp(Client))
         viewModel = ViewModelProvider(this, recorderViewModelFactory).get(RecorderViewModel::class.java)
+    }
+    private fun dialogShow(){
+        myDialog.show()
+    }
+    private fun dialogDismiss(){
+        myDialog.dismiss()
+    }
+    private fun createDialog(){
+        val dialog = layoutInflater.inflate(R.layout.loading_dialog, null)
+        myDialog.setContentView(dialog)
+        myDialog.setCancelable(true)
+        myDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
     }
 }

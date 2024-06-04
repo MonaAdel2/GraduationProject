@@ -1,6 +1,9 @@
 package com.example.graduationproject.company.view
 
+import android.app.Dialog
 import android.content.pm.PackageManager
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.media.MediaPlayer
 import android.media.MediaRecorder
 import android.net.Uri
@@ -44,6 +47,7 @@ class CompaniesSearchRecorderFragment : Fragment() {
     )
     private lateinit var binding: FragmentCompaniesSearchRecorderBinding
     private lateinit var mediaRecorder: MediaRecorder
+    private lateinit  var myDialog : Dialog
     private var permissionGranted = false
     private var dirPath = ""
     private var fileName = ""
@@ -64,6 +68,7 @@ class CompaniesSearchRecorderFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        myDialog=Dialog(requireContext())
         gettingViewModelReady()
         mediaRecorder = MediaRecorder()
         mediaPlayer = MediaPlayer()
@@ -91,7 +96,9 @@ class CompaniesSearchRecorderFragment : Fragment() {
              if (it.transcription.isEmpty()){
                  binding.tvTranscription.text = "No results found"
              }else{
+                 myDialog.dismiss()
                  binding.tvTranscription.text= it.transcription
+
              }
            val adapter= CompaniesAdapter(it.result,requireContext())
            binding.rvSearchCompaniesRecord.adapter= adapter
@@ -160,6 +167,8 @@ class CompaniesSearchRecorderFragment : Fragment() {
     }
 
     private fun uploadRecordingToFirebase() {
+        createDialog()
+        dialogShow()
         val file = Uri.fromFile(File("$dirPath$fileName.mp4"))
         val audioRef = storageReference.child("$fileName.wav")
 
@@ -196,5 +205,17 @@ class CompaniesSearchRecorderFragment : Fragment() {
         val companiesSearchRecorderFactory =
             CompaniesSearchRecorderFactory(CompaniesRepoImp(Client))
         viewModel = ViewModelProvider(this, companiesSearchRecorderFactory).get(CompaniesSearchRecorderViewModel::class.java)
+    }
+    private fun dialogShow(){
+        myDialog.show()
+    }
+    private fun dialogDismiss(){
+        myDialog.dismiss()
+    }
+    private fun createDialog(){
+        val dialog = layoutInflater.inflate(R.layout.loading_dialog, null)
+        myDialog.setContentView(dialog)
+        myDialog.setCancelable(true)
+        myDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
     }
 }

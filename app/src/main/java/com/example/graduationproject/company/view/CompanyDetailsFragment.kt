@@ -28,6 +28,9 @@ class CompanyDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.tvCompanyNameDetails.text=navArgs.companyData.Name
+        if(navArgs.companyData.About.isNullOrEmpty()){
+            binding.tvAbout.visibility = View.INVISIBLE
+        }
         binding.tvCompanyAboutDetails.text=navArgs.companyData.About
         binding.tvCompanyTelephoneDetails.text=navArgs.companyData.Telephones
         binding.tvCompanyAddressDetails.text=navArgs.companyData.Address

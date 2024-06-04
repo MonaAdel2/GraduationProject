@@ -88,7 +88,11 @@ class CompaniesSearchRecorderFragment : Fragment() {
             uploadRecordingToFirebase()
         }
          viewModel.companiesList.observe(requireActivity()){ it->
-             binding.tvTranscription.text= it.transcription
+             if (it.transcription.isEmpty()){
+                 binding.tvTranscription.text = "No results found"
+             }else{
+                 binding.tvTranscription.text= it.transcription
+             }
            val adapter= CompaniesAdapter(it.result,requireContext())
            binding.rvSearchCompaniesRecord.adapter= adapter
            binding.rvSearchCompaniesRecord.layoutManager = LinearLayoutManager(requireContext(),  RecyclerView.VERTICAL, false)

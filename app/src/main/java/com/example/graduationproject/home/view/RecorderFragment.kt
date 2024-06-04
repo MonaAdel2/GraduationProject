@@ -86,6 +86,8 @@ class RecorderFragment : Fragment() {
         }
 
       binding.btnPlayRecord.setOnClickListener {
+          val mySharedPrefs = SharedPrefs(requireContext())
+          mySharedPrefs.setValue("transcribe",  binding.tvTranscription.text.toString())
            val action = RecorderFragmentDirections.actionRecorderFragmentToChatFragment(navArgs.userData)
           findNavController().navigate(action)
            /* if (!permissionGranted) {
@@ -96,8 +98,6 @@ class RecorderFragment : Fragment() {
         }
         viewModel.transcription.observe(requireActivity()){
             binding.tvTranscription.text=it.toString()
-            val mySharedPrefs = SharedPrefs(requireContext())
-            mySharedPrefs.setValue("transcribe", it)
             Log.d("RecorderViewModel", "searchDocumentsByName: ")
         }
     /*    viewModel.userList.observe(requireActivity()){ it->

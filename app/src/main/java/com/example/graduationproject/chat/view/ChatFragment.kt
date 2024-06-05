@@ -96,24 +96,6 @@ class ChatFragment : Fragment(), onImageMessageClicked {
         binding.lifecycleOwner = viewLifecycleOwner
 
         constraintLayout = binding.chatLayout
-//        binding.circleMenu.setMainMenu(Color.parseColor("#CDCDCD"),R.drawable.menu_icon,R.drawable.cancel_icon)
-//            .addSubMenu(Color.parseColor("#88bef5"),R.drawable.camera_icon)
-//            .addSubMenu(Color.parseColor("#83e85a"),R.drawable.record_ic)
-//            .setOnMenuSelectedListener {index->
-//                when (index) {
-//                    0 -> {
-//                        Toast.makeText(requireActivity(), "Camera", Toast.LENGTH_SHORT).show()
-////                        constraintLayout.setBackgroundColor(Color.parseColor("#ecfffb"))
-//                    }
-//                    1 -> {
-//                        Toast.makeText(requireActivity(), "Record", Toast.LENGTH_SHORT).show()
-////                        constraintLayout.setBackgroundColor(Color.parseColor("#96f7d2"))
-//                    }
-//
-//                }
-//
-//
-//            }
 
         binding.tvReceiverNameChat.text = args.UserData.userName
         Glide.with(requireContext()).load(args.UserData.imageUri)
@@ -171,11 +153,9 @@ class ChatFragment : Fragment(), onImageMessageClicked {
                 onChattingOptionsClicked()
         }
         binding.fbSendImage.setOnClickListener {
-            Toast.makeText(requireContext(), "Send Imgae", Toast.LENGTH_SHORT).show()
             openGallery()
         }
         binding.fbSpeechToText.setOnClickListener {
-            Toast.makeText(requireContext(), "Speech to text", Toast.LENGTH_SHORT).show()
             goToRecording()
         }
 

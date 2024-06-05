@@ -39,7 +39,7 @@ class ProfileFragment : Fragment() {
 
     private val cropActivityContract = object : ActivityResultContract<Any?, Uri?>(){
         override fun createIntent(context: Context, input: Any?): Intent {
-            return CropImage.activity()
+            return CropImage.activity().setAspectRatio(1,1)
                 .getIntent(requireActivity())
         }
 

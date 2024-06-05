@@ -55,6 +55,15 @@ class ChatViewModel(val context: Context): ViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
 //            val context = MyApplication.instance.applicationContext
 
+            var friendImageTemp: String? = null
+            var friendNameTemp: String? = null
+            fireStore.collection("Users").document(receiver).get().addOnSuccessListener {
+                if (it.exists()){
+                    friendImageTemp = it.getString("imageUri")
+                    friendNameTemp= it.getString("userName")
+                }
+            }
+
             var hashmap = hashMapOf<String, Any>(
                 "sender" to sender,
                 "receiver" to receiver,
@@ -85,7 +94,7 @@ class ChatViewModel(val context: Context): ViewModel() {
                         "time" to Utils.getTime(),
                         "sender" to Utils.getUidLoggedIn(),
                         "message" to message.value!!,
-                        "friendImage" to friendImage,
+                        "friendImage" to friendImage ,
                         "name" to friendName,
                         "person" to "you",
                         "image" to "false"
@@ -112,7 +121,12 @@ class ChatViewModel(val context: Context): ViewModel() {
                                 Log.d(TAG, "sendMessage: in if ${message.value!!}")
                                 fireStore.collection("RecentChatsOf_${receiver}")
                                     .document(Utils.getUidLoggedIn())
-                                    .update("message", tempMessage, "time", Utils.getTime(), "person", name.value!!, "image", "false")
+                                    .update("message", tempMessage,
+                                        "time", Utils.getTime(),
+                                        "person", name.value!!,
+                                        "image", "false",
+                                        "friendImage", friendImage,
+                                        "name", friendName)
 
                             } else {
                                 // Document does not exist, create it first

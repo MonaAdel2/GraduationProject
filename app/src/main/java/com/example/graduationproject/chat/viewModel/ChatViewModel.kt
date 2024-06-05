@@ -125,8 +125,8 @@ class ChatViewModel(val context: Context): ViewModel() {
                                         "time", Utils.getTime(),
                                         "person", name.value!!,
                                         "image", "false",
-                                        "friendImage", friendImage,
-                                        "name", friendName)
+                                        "friendImage", imageUrl.value!!,
+                                        "name", name.value!!)
 
                             } else {
                                 // Document does not exist, create it first
@@ -215,7 +215,9 @@ class ChatViewModel(val context: Context): ViewModel() {
                                         "message", imageUri,
                                         "time", Utils.getTime(),
                                         "person", name.value!!,
-                                        "image" , "true"
+                                        "image" , "true",
+                                        "friendImage", imageUrl.value!!,
+                                        "name", name.value!!
                                     )
 
                             } else {
